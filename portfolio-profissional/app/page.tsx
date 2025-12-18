@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { usePortfolio } from '@/lib/hooks/usePortfolio';
-import { ThemeToggle } from '@/components/ui/ThemeToggle';
 
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState('home');
@@ -36,7 +35,6 @@ export default function Portfolio() {
                   {item}
                 </button>
               ))}
-              <ThemeToggle />
             </div>
           </div>
         </div>
@@ -267,7 +265,7 @@ export default function Portfolio() {
       <footer className="py-8 px-4 sm:px-6 lg:px-8 border-t border-border">
         <div className="max-w-6xl mx-auto text-center">
           <p className="text-muted-foreground">
-            © 2024 {personal.name}. Todos os direitos reservados.
+            © 2025 {personal.name}. Todos os direitos reservados.
           </p>
         </div>
       </footer>

@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Gilberto Nascimento - Engenheiro de Manufatura & Desenvolvedor",
-  description: "Portfolio profissional de Gilberto Nascimento, Engenheiro de Manufatura especializado em desenvolvimento web moderno.",
+  title: "Gilberto Nascimento - Engenheiro de Manufatura",
+  description: "Portfolio profissional de Gilberto Nascimento, Engenheiro de Manufatura especializado gestão de processos",
 };
 
 export default function RootLayout({
