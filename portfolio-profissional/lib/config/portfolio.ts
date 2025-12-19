@@ -3,10 +3,10 @@ import { PortfolioConfig } from '../types/portfolio';
 export const portfolioConfig: PortfolioConfig = {
   personal: {
     name: "Gilberto Nascimento",
-    title: "Engenheiro de manufatura",
-    description: "Apaixonado por criar soluções digitais inovadoras e experiências de usuário excepcionais.",
+    title: "Engenheiro de Processos",
+    description: "Dedicado a transformar método em prática e risco em prevenção.",
     email: "seuemail@exemplo.com",
-    phone: "+55 (11) 99999-9999",
+    phone: "+55 (11) 99881-0297",
     location: "São Paulo, Brasil",
   },
 

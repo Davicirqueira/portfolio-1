@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/lib/context/ThemeContext";
 import { PortfolioProvider } from "@/lib/context/PortfolioContext";
 import { ThemeScript } from "@/components/ThemeScript";
+import { MouseFollower } from "@/components/ui/MouseFollower";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,6 +36,7 @@ export default function RootLayout({
       >
         <ThemeProvider>
           <PortfolioProvider>
+            <MouseFollower />
             {children}
           </PortfolioProvider>
         </ThemeProvider>
