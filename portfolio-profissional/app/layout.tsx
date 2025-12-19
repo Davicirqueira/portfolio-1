@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Gilberto Nascimento - Engenheiro de Manufatura",
+  title: "Gilberto Nascimento",
   description: "Portfolio profissional de Gilberto Nascimento, Engenheiro de Manufatura especializado gestão de processos",
 };
 

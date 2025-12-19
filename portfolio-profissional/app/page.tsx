@@ -24,8 +24,8 @@ export default function Portfolio() {
 
   const typewriterTexts = [
     personal.title,
-    'Desenvolvedor Full Stack',
-    'Especialista em React',
+    'Especialista em APQP',
+    'Especialista em PFMEA',
     'Arquiteto de Soluções'
   ];
 
