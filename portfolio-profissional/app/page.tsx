@@ -10,6 +10,7 @@ import { TypewriterText } from '@/components/ui/TypewriterText';
 import { ParticleBackground } from '@/components/ui/ParticleBackground';
 import { ScrollProgress } from '@/components/ui/ScrollProgress';
 import { ScrollToTop } from '@/components/ui/ScrollToTop';
+import { ProfileAvatar } from '@/components/ui/ProfileAvatar';
 import { StatsSection } from '@/components/sections/StatsSection';
 import { TestimonialsSection } from '@/components/sections/TestimonialsSection';
 
@@ -85,20 +86,12 @@ export default function Portfolio() {
       <section id="home" className="pt-20 pb-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center py-20">
-            <motion.div 
-              className="w-32 h-32 mx-auto mb-8 bg-card border-2 border-foreground rounded-full flex items-center justify-center text-foreground text-4xl font-bold relative overflow-hidden"
-              initial={{ scale: 0, rotate: -180 }}
-              animate={{ scale: 1, rotate: 0 }}
-              transition={{ duration: 0.8, type: 'spring', stiffness: 100 }}
-              whileHover={{ scale: 1.1, rotate: 5 }}
-            >
-              {personal.name.split(' ').map(n => n[0]).join('')}
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-primary/20 to-purple-500/20 rounded-full"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
-              />
-            </motion.div>
+            <ProfileAvatar 
+              section="hero"
+              size="lg"
+              className="mx-auto mb-8"
+              enableAnimations={true}
+            />
             
             <motion.h1 
               className="text-4xl md:text-6xl font-bold text-foreground mb-4"
@@ -235,21 +228,11 @@ export default function Portfolio() {
             </AnimatedSection>
             
             <AnimatedSection direction="right" className="flex justify-center">
-              <motion.div 
-                className="w-64 h-64 bg-card border-2 border-foreground rounded-lg flex items-center justify-center text-foreground text-6xl font-bold relative overflow-hidden group"
-                whileHover={{ scale: 1.05, rotate: 2 }}
-                transition={{ duration: 0.3 }}
-              >
-                {personal.name.split(' ').map(n => n[0]).join('')}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-br from-primary/20 to-purple-500/20 opacity-0 group-hover:opacity-100"
-                  transition={{ duration: 0.3 }}
-                />
-                <motion.div
-                  className="absolute -inset-1 bg-gradient-to-r from-primary to-purple-500 rounded-lg opacity-0 group-hover:opacity-20 blur-xl"
-                  transition={{ duration: 0.3 }}
-                />
-              </motion.div>
+              <ProfileAvatar 
+                section="about"
+                size="xl"
+                enableAnimations={true}
+              />
             </AnimatedSection>
           </div>
         </div>

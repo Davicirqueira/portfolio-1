@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { usePortfolioContext } from '@/lib/context/PortfolioContext';
-import { PortfolioConfig, Project, Experience, Education, Testimonial } from '@/lib/types';
+import { PortfolioConfig, Project, Experience, Education, Testimonial } from '@/lib/types/portfolio';
 
 export function usePortfolio() {
   const { config } = usePortfolioContext();

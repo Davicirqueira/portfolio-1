@@ -1,5 +1,22 @@
 // Portfolio Configuration Types
 
+export interface AnimationConfig {
+  hover: {
+    scale: number;
+    rotate: number;
+    duration: number;
+  };
+  entrance: {
+    fadeIn: boolean;
+    slideDirection?: 'up' | 'down' | 'left' | 'right';
+    duration: number;
+  };
+  subtle: {
+    breathe: boolean; // Subtle breathing animation
+    glow: boolean; // Subtle glow effect
+  };
+}
+
 export interface PersonalInfo {
   name: string;
   title: string;
@@ -8,6 +25,7 @@ export interface PersonalInfo {
   phone: string;
   location: string;
   avatar?: string;
+  profilePhoto?: string; // Path to professional photo for About section
 }
 
 export interface SocialLinks {

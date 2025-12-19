@@ -8,6 +8,7 @@ export const portfolioConfig: PortfolioConfig = {
     email: "seuemail@exemplo.com",
     phone: "+55 (11) 99881-0297",
     location: "São Paulo, Brasil",
+    profilePhoto: "/profile-photo.png", // Professional photo for About section
   },
 
   about: "Desenvolvedor com mais de 5 anos de experiência em tecnologias web modernas. Especializado em React, Node.js e desenvolvimento de aplicações escaláveis.",

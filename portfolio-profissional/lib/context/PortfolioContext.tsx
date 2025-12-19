@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, useCallback, ReactNode } from 'react';
-import { PortfolioConfig, Project, Experience, Education, Testimonial } from '@/lib/types';
+import { PortfolioConfig, Project, Experience, Education, Testimonial } from '@/lib/types/portfolio';
 import { portfolioConfig as defaultConfig } from '@/lib/config/portfolio';
 
 interface PortfolioContextType {
