@@ -91,10 +91,24 @@ export interface SEOConfig {
   twitterHandle?: string;
 }
 
+export interface SkillItem {
+  name: string;
+  proficiency: number; // 1-100 percentage
+  color: 'blue' | 'green' | 'purple' | 'orange' | 'red';
+  description?: string;
+}
+
+export interface SkillCategory {
+  id: string;
+  name: string;
+  skills: SkillItem[];
+}
+
 export interface PortfolioConfig {
   personal: PersonalInfo;
   about: string;
   skills: string[];
+  skillCategories?: SkillCategory[]; // Optional for backward compatibility
   projects: Project[];
   experience: Experience[];
   education: Education[];

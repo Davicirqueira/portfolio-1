@@ -11,11 +11,57 @@ export const portfolioConfig: PortfolioConfig = {
     profilePhoto: "/profile-photo.png", // Professional photo for About section
   },
 
-  about: "Desenvolvedor com mais de 5 anos de experiência em tecnologias web modernas. Especializado em React, Node.js e desenvolvimento de aplicações escaláveis.",
+  about: "Engenheiro de Processos com mais de 5 anos de experiência em qualidade e processos na indústria automotiva. Especializado em PFMEA, APQP e implementação de controles de qualidade em ambientes de manufatura.",
 
   skills: [
-    "JavaScript", "TypeScript", "React", "Next.js", "Node.js", 
-    "Python", "PostgreSQL", "MongoDB", "AWS", "Docker"
+    "PFMEA", "APQP", "Plano de Controle", "FAST", "OMP", "SMP",
+    "Mapeamento de Processos", "Controles Visuais", "Melhoria Contínua",
+    "Padronização de Processos", "Gestão de Projetos", "Comunicação Estratégica",
+    "Redação Técnica", "Análise de Riscos"
+  ],
+
+  skillCategories: [
+    {
+      id: 'automotive-quality',
+      name: 'Qualidade e Processos Automotivos',
+      skills: [
+        { name: 'PFMEA', proficiency: 95, color: 'blue' },
+        { name: 'APQP', proficiency: 90, color: 'green' },
+        { name: 'Plano de Controle', proficiency: 90, color: 'purple' },
+        { name: 'FAST', proficiency: 85, color: 'orange' },
+        { name: 'OMP', proficiency: 85, color: 'red' },
+        { name: 'SMP', proficiency: 85, color: 'blue' }
+      ]
+    },
+    {
+      id: 'process-analysis',
+      name: 'Análise e Melhoria de Processos',
+      skills: [
+        { name: 'Mapeamento de Processos', proficiency: 90, color: 'green' },
+        { name: 'Controles Visuais', proficiency: 85, color: 'purple' },
+        { name: 'Melhoria Contínua', proficiency: 90, color: 'orange' },
+        { name: 'Padronização de Processos', proficiency: 85, color: 'red' }
+      ]
+    },
+    {
+      id: 'management-leadership',
+      name: 'Gestão e Liderança',
+      skills: [
+        { name: 'Gestão de Projetos', proficiency: 85, color: 'blue' },
+        { name: 'Controle de Indicadores', proficiency: 90, color: 'green' },
+        { name: 'Relacionamento Interpessoal', proficiency: 90, color: 'purple' }
+      ]
+    },
+    {
+      id: 'strategic-communication',
+      name: 'Comunicação Estratégica',
+      skills: [
+        { name: 'Comunicação Executiva', proficiency: 90, color: 'orange' },
+        { name: 'Apresentações para Liderança', proficiency: 85, color: 'red' },
+        { name: 'Treinamentos Operacionais', proficiency: 85, color: 'blue' },
+        { name: 'Redação Técnica', proficiency: 85, color: 'green' }
+      ]
+    }
   ],
 
   projects: [

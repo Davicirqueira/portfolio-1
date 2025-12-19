@@ -76,6 +76,7 @@ export function usePortfolio() {
     personal: config.personal,
     about: config.about,
     skills: config.skills,
+    skillCategories: config.skillCategories,
     social: config.social,
     seo: config.seo,
     

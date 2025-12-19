@@ -16,7 +16,7 @@ import { TestimonialsSection } from '@/components/sections/TestimonialsSection';
 
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState('home');
-  const { personal, about, skills, projects, experience, social } = usePortfolio();
+  const { personal, about, skills, skillCategories, projects, experience, social } = usePortfolio();
 
   const scrollToSection = (sectionId: string) => {
     setActiveSection(sectionId);
@@ -247,32 +247,46 @@ export default function Portfolio() {
         <div className="max-w-6xl mx-auto">
           <AnimatedSection direction="up" className="text-center mb-12">
             <h2 className="text-3xl font-bold text-foreground mb-4">
-              Habilidades Técnicas
+              Competências Técnicas
             </h2>
             <div className="w-20 h-1 bg-primary mx-auto rounded-full" />
             <p className="text-lg text-muted-foreground mt-4 max-w-2xl mx-auto">
-              Tecnologias e ferramentas que domino para criar soluções inovadoras
+              Metodologias e competências especializadas em qualidade e processos na indústria automotiva
             </p>
           </AnimatedSection>
 
           {/* Skills with progress bars */}
           <div className="grid md:grid-cols-2 gap-8 mb-12">
-            {[
-              { skill: 'JavaScript/TypeScript', percentage: 95, color: 'blue' as const },
-              { skill: 'React/Next.js', percentage: 90, color: 'green' as const },
-              { skill: 'Node.js', percentage: 85, color: 'purple' as const },
-              { skill: 'Python', percentage: 80, color: 'orange' as const },
-              { skill: 'PostgreSQL/MongoDB', percentage: 85, color: 'red' as const },
-              { skill: 'AWS/Docker', percentage: 75, color: 'blue' as const }
-            ].map((item, index) => (
-              <AnimatedProgressBar
-                key={item.skill}
-                label={item.skill}
-                percentage={item.percentage}
-                color={item.color}
-                delay={index * 0.1}
-              />
-            ))}
+            {skillCategories && skillCategories.length > 0 ? (
+              skillCategories.slice(0, 2).flatMap(category => 
+                category.skills.slice(0, 3)
+              ).map((skillItem, index) => (
+                <AnimatedProgressBar
+                  key={skillItem.name}
+                  label={skillItem.name}
+                  percentage={skillItem.proficiency}
+                  color={skillItem.color}
+                  delay={index * 0.1}
+                />
+              ))
+            ) : (
+              [
+                { skill: 'PFMEA', percentage: 95, color: 'blue' as const },
+                { skill: 'APQP', percentage: 90, color: 'green' as const },
+                { skill: 'Mapeamento de Processos', percentage: 90, color: 'purple' as const },
+                { skill: 'Gestão de Projetos', percentage: 85, color: 'orange' as const },
+                { skill: 'Comunicação Estratégica', percentage: 90, color: 'red' as const },
+                { skill: 'Controle de Indicadores', percentage: 90, color: 'blue' as const }
+              ].map((item, index) => (
+                <AnimatedProgressBar
+                  key={item.skill}
+                  label={item.skill}
+                  percentage={item.percentage}
+                  color={item.color}
+                  delay={index * 0.1}
+                />
+              ))
+            )}
           </div>
 
           {/* Skills grid */}
