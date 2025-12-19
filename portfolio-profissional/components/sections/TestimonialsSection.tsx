@@ -50,7 +50,7 @@ export function TestimonialsSection() {
                 animate={{ scale: 1, rotate: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
-                <Quote className="w-12 h-12" />
+                <Quote className="w-8 h-8" />
               </motion.div>
 
               {/* Testimonial content */}
