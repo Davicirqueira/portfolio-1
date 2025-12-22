@@ -5,13 +5,13 @@ export const portfolioConfig: PortfolioConfig = {
     name: "Gilberto Nascimento",
     title: "Engenheiro de Processos",
     description: "Dedicado a transformar método em prática e risco em prevenção.",
-    email: "seuemail@exemplo.com",
+    email: "gilberto.tri@gmail.com",
     phone: "+55 (11) 99881-0297",
     location: "São Paulo, Brasil",
     profilePhoto: "/profile-photo.png", // Professional photo for About section
   },
 
-  about: "Engenheiro de Processos com mais de 5 anos de experiência em qualidade e processos na indústria automotiva. Especializado em PFMEA, APQP e implementação de controles de qualidade em ambientes de manufatura.",
+  about: "Engenheiro com mais de 8 anos de experiência em qualidade e processos na indústria automotiva. Especializado em PFMEA, APQP e implementação de controles de qualidade em ambientes de manufatura.",
 
   skills: [
     "PFMEA", "APQP", "Plano de Controle", "FAST", "OMP", "SMP",
@@ -66,88 +66,88 @@ export const portfolioConfig: PortfolioConfig = {
 
   projects: [
     {
-      id: "ecommerce-platform",
-      title: "E-commerce Platform",
-      description: "Plataforma completa de e-commerce com painel administrativo",
-      longDescription: "Uma plataforma completa de e-commerce desenvolvida com React e Node.js, incluindo sistema de pagamentos, gerenciamento de produtos, painel administrativo e dashboard de analytics.",
-      technologies: ["React", "Node.js", "PostgreSQL"],
-      githubUrl: "https://github.com/seuusuario/projeto1",
-      demoUrl: "https://projeto1.com",
+      id: "pfmea-optimization-system",
+      title: "Sistema de Otimização PFMEA",
+      description: "Desenvolvimento de metodologia para otimização de análises PFMEA em processos automotivos",
+      longDescription: "Sistema completo para análise e otimização de PFMEAs, incluindo identificação automática de riscos, sugestões de controles preventivos e dashboard de monitoramento de indicadores de qualidade.",
+      technologies: ["PFMEA", "Análise de Riscos", "Controles Preventivos"],
+      githubUrl: "https://github.com/gilberto/pfmea-system",
+      demoUrl: "https://pfmea-optimization.com",
       featured: true,
-      category: "Web Development",
+      category: "Quality Engineering",
       completedAt: "2024-01-15"
     },
     {
-      id: "task-management-app",
-      title: "Task Management App",
-      description: "Aplicativo de gerenciamento de tarefas com colaboração em tempo real",
-      longDescription: "Aplicativo de produtividade com funcionalidades de colaboração em tempo real, notificações push, sincronização offline e integração com calendários.",
-      technologies: ["Next.js", "Socket.io", "MongoDB"],
-      githubUrl: "https://github.com/seuusuario/projeto2",
-      demoUrl: "https://projeto2.com",
+      id: "apqp-management-platform",
+      title: "Plataforma de Gestão APQP",
+      description: "Sistema integrado para gerenciamento completo de projetos APQP na indústria automotiva",
+      longDescription: "Plataforma completa para gestão de projetos APQP, incluindo controle de fases, documentação técnica, aprovações de peças e integração com fornecedores.",
+      technologies: ["APQP", "Gestão de Projetos", "Controle de Qualidade"],
+      githubUrl: "https://github.com/gilberto/apqp-platform",
+      demoUrl: "https://apqp-management.com",
       featured: true,
-      category: "Productivity",
+      category: "Process Engineering",
       completedAt: "2023-11-20"
     },
     {
-      id: "data-analytics-dashboard",
-      title: "Data Analytics Dashboard",
-      description: "Dashboard interativo para análise de dados com visualizações dinâmicas",
-      longDescription: "Dashboard avançado para análise de dados com gráficos interativos, relatórios customizáveis e integração com múltiplas fontes de dados.",
-      technologies: ["React", "D3.js", "Python"],
-      githubUrl: "https://github.com/seuusuario/projeto3",
-      demoUrl: "https://projeto3.com",
+      id: "quality-control-dashboard",
+      title: "Dashboard de Controle de Qualidade",
+      description: "Dashboard interativo para monitoramento de indicadores de qualidade em tempo real",
+      longDescription: "Dashboard avançado para monitoramento de KPIs de qualidade, análise de tendências, alertas automáticos e relatórios de não-conformidades em processos de manufatura.",
+      technologies: ["SPC", "Controle Estatístico", "Indicadores KPI"],
+      githubUrl: "https://github.com/gilberto/quality-dashboard",
+      demoUrl: "https://quality-control.com",
       featured: false,
-      category: "Data Science",
+      category: "Quality Management",
       completedAt: "2023-08-10"
     }
   ],
 
   experience: [
     {
-      id: "tech-company-senior",
-      company: "Tech Company",
-      position: "Senior Developer",
-      period: "2022 - Presente",
-      description: "Desenvolvimento de aplicações web escaláveis e liderança técnica de equipe.",
-      startDate: "2022-03-01"
+      id: "automotive-senior-engineer",
+      company: "Magna International",
+      position: "Engenheiro de Processos Sênior",
+      period: "2020 - Presente",
+      description: "Desenvolvimento e implementação de PFMEAs, APQPs e controles de qualidade em processos de manufatura automotiva. Liderança de projetos de melhoria contínua e padronização de processos.",
+      startDate: "2020-03-01"
     },
     {
-      id: "startup-fullstack",
-      company: "Startup Inc",
-      position: "Full Stack Developer",
-      period: "2020 - 2022",
-      description: "Desenvolvimento completo de produtos digitais do zero ao deploy.",
-      startDate: "2020-06-15",
-      endDate: "2022-02-28"
+      id: "quality-engineer",
+      company: "Continental Automotive",
+      position: "Engenheiro de Qualidade",
+      period: "2017 - 2020",
+      description: "Implementação de sistemas de gestão da qualidade, desenvolvimento de planos de controle e análise de riscos em processos produtivos. Especialização em FAST, OMP e SMP.",
+      startDate: "2017-06-15",
+      endDate: "2020-02-28"
     }
   ],
 
   education: [
     {
-      id: "computer-science-degree",
+      id: "mechanical-engineering-degree",
       institution: "Universidade de São Paulo",
       degree: "Bacharelado",
-      field: "Ciência da Computação",
-      startDate: "2016-02-01",
-      endDate: "2019-12-15",
-      description: "Formação sólida em algoritmos, estruturas de dados, engenharia de software e desenvolvimento web.",
+      field: "Engenharia Mecânica",
+      startDate: "2012-02-01",
+      endDate: "2016-12-15",
+      description: "Formação sólida em processos de manufatura, controle de qualidade, gestão de projetos e sistemas produtivos.",
       gpa: "8.5/10",
       achievements: [
-        "Projeto de conclusão premiado",
-        "Monitor de Programação Web",
-        "Participação em hackathons"
+        "Projeto de TCC em Otimização de Processos",
+        "Monitor de Processos de Manufatura",
+        "Participação em projetos de pesquisa"
       ]
     },
     {
-      id: "aws-certification",
-      institution: "Amazon Web Services",
+      id: "quality-management-certification",
+      institution: "AIAG - Automotive Industry Action Group",
       degree: "Certificação",
-      field: "AWS Solutions Architect",
-      startDate: "2023-01-15",
-      endDate: "2023-02-20",
-      description: "Certificação em arquitetura de soluções na nuvem AWS.",
-      verificationUrl: "https://aws.amazon.com/verification/example"
+      field: "PFMEA & APQP Advanced",
+      startDate: "2018-01-15",
+      endDate: "2018-03-20",
+      description: "Certificação avançada em metodologias PFMEA e APQP para indústria automotiva.",
+      verificationUrl: "https://aiag.org/verification/example"
     }
   ],
 
@@ -155,27 +155,27 @@ export const portfolioConfig: PortfolioConfig = {
     {
       id: "testimonial-1",
       name: "Maria Silva",
-      position: "Product Manager",
-      company: "Tech Company",
-      content: "Gilberto é um desenvolvedor excepcional. Sua capacidade de transformar ideias complexas em soluções elegantes é impressionante. Trabalhar com ele foi uma experiência fantástica.",
+      position: "Gerente de Qualidade",
+      company: "Magna International",
+      content: "Gilberto é um engenheiro excepcional. Sua capacidade de transformar processos complexos em soluções eficientes e sua expertise em PFMEA são impressionantes. Trabalhar com ele elevou nossos padrões de qualidade.",
       date: "2024-01-15",
       linkedinUrl: "https://linkedin.com/in/mariasilva"
     },
     {
       id: "testimonial-2",
       name: "João Santos",
-      position: "CTO",
-      company: "Startup Inc",
-      content: "Durante nosso tempo trabalhando juntos, Gilberto demonstrou não apenas excelência técnica, mas também liderança e capacidade de mentoria. Recomendo sem hesitação.",
+      position: "Diretor de Manufatura",
+      company: "Continental Automotive",
+      content: "Durante nosso tempo trabalhando juntos, Gilberto demonstrou não apenas excelência técnica em processos automotivos, mas também liderança e capacidade de implementar melhorias significativas. Recomendo sem hesitação.",
       date: "2023-12-10",
       linkedinUrl: "https://linkedin.com/in/joaosantos"
     },
     {
       id: "testimonial-3",
       name: "Ana Costa",
-      position: "Designer UX/UI",
-      company: "Design Studio",
-      content: "A colaboração com Gilberto foi perfeita. Ele entende profundamente tanto o lado técnico quanto a experiência do usuário, criando produtos que realmente funcionam.",
+      position: "Engenheira de Processos",
+      company: "Bosch Automotive",
+      content: "A colaboração com Gilberto foi perfeita. Ele entende profundamente tanto os aspectos técnicos quanto os operacionais, criando soluções que realmente funcionam no chão de fábrica.",
       date: "2023-10-05",
       linkedinUrl: "https://linkedin.com/in/anacosta"
     }
@@ -189,20 +189,20 @@ export const portfolioConfig: PortfolioConfig = {
   },
 
   seo: {
-    title: "Gilberto Nascimento - Engenheiro de Manufatura & Desenvolvedor",
-    description: "Portfolio profissional de Gilberto Nascimento, engenheiro de manufatura especializado em soluções digitais inovadoras e desenvolvimento web moderno.",
+    title: "Gilberto Nascimento - Engenheiro de Processos & Qualidade Automotiva",
+    description: "Portfolio profissional de Gilberto Nascimento, engenheiro de processos especializado em PFMEA, APQP e sistemas de qualidade na indústria automotiva.",
     keywords: [
-      "desenvolvedor",
-      "engenheiro",
+      "engenheiro de processos",
+      "pfmea",
+      "apqp",
+      "qualidade automotiva",
+      "controle de qualidade",
       "manufatura",
-      "react",
-      "next.js",
-      "typescript",
-      "node.js",
+      "melhoria contínua",
       "portfolio",
       "são paulo"
     ],
     ogImage: "/og-image.jpg",
-    twitterHandle: "@seuusuario"
+    twitterHandle: "@gilbertonascimento"
   }
 };

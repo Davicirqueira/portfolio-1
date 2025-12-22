@@ -13,14 +13,27 @@ import { ScrollToTop } from '@/components/ui/ScrollToTop';
 import { ProfileAvatar } from '@/components/ui/ProfileAvatar';
 import { StatsSection } from '@/components/sections/StatsSection';
 import { TestimonialsSection } from '@/components/sections/TestimonialsSection';
+import { ProjectModal } from '@/components/ui/ProjectModal';
 
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState('home');
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { personal, about, skills, skillCategories, projects, experience, social } = usePortfolio();
 
   const scrollToSection = (sectionId: string) => {
     setActiveSection(sectionId);
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const openProjectModal = (project: any) => {
+    setSelectedProject(project);
+    setIsModalOpen(true);
+  };
+
+  const closeProjectModal = () => {
+    setIsModalOpen(false);
+    setSelectedProject(null);
   };
 
   const typewriterTexts = [
@@ -380,36 +393,26 @@ export default function Portfolio() {
                   </motion.div>
                   
                   <motion.div 
-                    className="flex gap-4 pt-4 border-t border-border"
+                    className="pt-4 border-t border-border"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: 0.4 }}
                   >
-                    {project.githubUrl && (
-                      <motion.a 
-                        href={project.githubUrl}
-                        className="text-primary hover:text-primary/80 font-medium transition-colors"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        GitHub
-                      </motion.a>
-                    )}
-                    {project.demoUrl && (
-                      <motion.a 
-                        href={project.demoUrl}
-                        className="text-primary hover:text-primary/80 font-medium transition-colors"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        Demo
-                      </motion.a>
-                    )}
+                    <motion.button
+                      onClick={() => openProjectModal(project)}
+                      className="w-full bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2 rounded-lg transition-all duration-200 font-medium"
+                      whileHover={{ 
+                        scale: 1.03,
+                        transition: { duration: 0.15, ease: "easeOut" }
+                      }}
+                      whileTap={{ 
+                        scale: 0.97,
+                        transition: { duration: 0.1 }
+                      }}
+                    >
+                      Saber mais
+                    </motion.button>
                   </motion.div>
                 </AnimatedCard>
               </AnimatedSection>
@@ -609,6 +612,13 @@ export default function Portfolio() {
       
       <ScrollToTop />
 
+      {/* Project Modal */}
+      <ProjectModal 
+        project={selectedProject}
+        isOpen={isModalOpen}
+        onClose={closeProjectModal}
+      />
+
       {/* Footer */}
       <motion.footer 
         className="py-8 px-4 sm:px-6 lg:px-8 border-t border-border bg-card/30"
@@ -634,7 +644,7 @@ export default function Portfolio() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            Feito com ❤️ e muito ☕
+          
           </motion.div>
         </div>
       </motion.footer>

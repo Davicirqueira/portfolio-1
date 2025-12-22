@@ -14,22 +14,22 @@ interface Stat {
 
 const stats: Stat[] = [
   {
-    label: 'Projetos Concluídos',
+    label: 'PFMEAs Desenvolvidos',
     value: 50,
     suffix: '+'
   },
   {
     label: 'Anos de Experiência',
-    value: 5,
+    value: 8,
     suffix: '+'
   },
   {
-    label: 'Clientes Satisfeitos',
+    label: 'Projetos APQP',
     value: 30,
     suffix: '+'
   },
   {
-    label: 'Taxa de Sucesso',
+    label: 'Conformidade Qualidade',
     value: 98,
     suffix: '%'
   }
@@ -44,7 +44,7 @@ export function StatsSection() {
             Números que Falam por Si
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Alguns números que representam minha jornada profissional e o impacto dos projetos desenvolvidos.
+            Alguns números que representam minha trajetória em engenharia de processos e qualidade automotiva.
           </p>
         </AnimatedSection>
 
