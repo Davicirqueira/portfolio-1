@@ -14,12 +14,15 @@ import { ProfileAvatar } from '@/components/ui/ProfileAvatar';
 import { StatsSection } from '@/components/sections/StatsSection';
 import { TestimonialsSection } from '@/components/sections/TestimonialsSection';
 import { ProjectModal } from '@/components/ui/ProjectModal';
+import { EducationButton } from '@/components/ui/EducationButton';
+import { EducationModal } from '@/components/ui/EducationModal';
 
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState('home');
   const [selectedProject, setSelectedProject] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { personal, about, skills, skillCategories, projects, experience, social } = usePortfolio();
+  const [isEducationModalOpen, setIsEducationModalOpen] = useState(false);
+  const { personal, about, skills, skillCategories, projects, experience, education, social } = usePortfolio();
 
   const scrollToSection = (sectionId: string) => {
     setActiveSection(sectionId);
@@ -34,6 +37,14 @@ export default function Portfolio() {
   const closeProjectModal = () => {
     setIsModalOpen(false);
     setSelectedProject(null);
+  };
+
+  const openEducationModal = () => {
+    setIsEducationModalOpen(true);
+  };
+
+  const closeEducationModal = () => {
+    setIsEducationModalOpen(false);
   };
 
   const typewriterTexts = [
@@ -215,6 +226,17 @@ export default function Portfolio() {
               >
                 {about}
               </motion.p>
+
+              {/* Education Button */}
+              <motion.div
+                className="mb-8"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+              >
+                <EducationButton onClick={openEducationModal} />
+              </motion.div>
               
               <motion.div 
                 className="space-y-4"
@@ -617,6 +639,13 @@ export default function Portfolio() {
         project={selectedProject}
         isOpen={isModalOpen}
         onClose={closeProjectModal}
+      />
+
+      {/* Education Modal */}
+      <EducationModal 
+        educationData={education}
+        isOpen={isEducationModalOpen}
+        onClose={closeEducationModal}
       />
 
       {/* Footer */}

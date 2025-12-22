@@ -126,28 +126,54 @@ export const portfolioConfig: PortfolioConfig = {
   education: [
     {
       id: "mechanical-engineering-degree",
-      institution: "Universidade de São Paulo",
+      institution: "Universidade de São Paulo (USP)",
       degree: "Bacharelado",
       field: "Engenharia Mecânica",
       startDate: "2012-02-01",
       endDate: "2016-12-15",
-      description: "Formação sólida em processos de manufatura, controle de qualidade, gestão de projetos e sistemas produtivos.",
+      description: "Formação sólida em processos de manufatura, controle de qualidade, gestão de projetos e sistemas produtivos. Foco em metodologias de qualidade aplicadas à indústria automotiva, com ênfase em análise de riscos e otimização de processos industriais.",
       gpa: "8.5/10",
       achievements: [
-        "Projeto de TCC em Otimização de Processos",
-        "Monitor de Processos de Manufatura",
-        "Participação em projetos de pesquisa"
+        "Projeto de TCC em Otimização de Processos Industriais com foco em PFMEA",
+        "Monitor da disciplina de Processos de Manufatura por 2 semestres",
+        "Participação em projetos de pesquisa em Qualidade Industrial e Lean Manufacturing",
+        "Membro ativo do Centro Acadêmico de Engenharia Mecânica",
+        "Certificado de Excelência Acadêmica em Controle de Qualidade"
       ]
     },
     {
       id: "quality-management-certification",
       institution: "AIAG - Automotive Industry Action Group",
-      degree: "Certificação",
+      degree: "Certificação Profissional",
       field: "PFMEA & APQP Advanced",
       startDate: "2018-01-15",
       endDate: "2018-03-20",
-      description: "Certificação avançada em metodologias PFMEA e APQP para indústria automotiva.",
+      description: "Certificação avançada em metodologias PFMEA (Process Failure Mode and Effects Analysis) e APQP (Advanced Product Quality Planning) para indústria automotiva, seguindo padrões internacionais AIAG e VDA. Capacitação completa em análise de riscos, controles preventivos e gestão de qualidade em processos de manufatura.",
       verificationUrl: "https://aiag.org/verification/example"
+    },
+    {
+      id: "lean-six-sigma-certification",
+      institution: "Instituto Brasileiro de Qualidade e Produtividade (IBQP)",
+      degree: "Certificação Green Belt",
+      field: "Lean Six Sigma",
+      startDate: "2019-03-01",
+      endDate: "2019-06-15",
+      description: "Certificação Green Belt em metodologia Lean Six Sigma, com foco em eliminação de desperdícios, melhoria contínua e otimização de processos. Aplicação prática de ferramentas DMAIC, análise estatística e gestão de projetos de melhoria.",
+      achievements: [
+        "Projeto de certificação resultou em 25% de redução de tempo de ciclo",
+        "Implementação de controles visuais em linha de produção",
+        "Treinamento de equipes operacionais em conceitos Lean"
+      ]
+    },
+    {
+      id: "project-management-certification",
+      institution: "Project Management Institute (PMI)",
+      degree: "Certificação PMP",
+      field: "Gerenciamento de Projetos",
+      startDate: "2021-01-10",
+      endDate: "2021-04-20",
+      description: "Certificação Project Management Professional (PMP) reconhecida internacionalmente, demonstrando competência em liderança de projetos, gestão de equipes e aplicação de metodologias ágeis e tradicionais de gerenciamento de projetos.",
+      verificationUrl: "https://pmi.org/verification/example"
     }
   ],
 
