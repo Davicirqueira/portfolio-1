@@ -104,11 +104,24 @@ export interface SkillCategory {
   skills: SkillItem[];
 }
 
+export interface EnhancedSkill {
+  id: string;
+  name: string;
+  category: string;
+  description: string;
+  detailedDescription: string[];
+  usageExamples: string[];
+  expertiseLevel: 'Advanced' | 'Expert' | 'Specialist';
+  yearsOfExperience: number;
+  keyProjects?: string[];
+}
+
 export interface PortfolioConfig {
   personal: PersonalInfo;
   about: string;
   skills: string[];
   skillCategories?: SkillCategory[]; // Optional for backward compatibility
+  enhancedSkills?: EnhancedSkill[]; // New enhanced skills structure
   projects: Project[];
   experience: Experience[];
   education: Education[];

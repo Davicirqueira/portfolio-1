@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 import { usePortfolio } from '@/lib/hooks/usePortfolio';
 import { AnimatedSection } from '@/components/ui/AnimatedSection';
 import { AnimatedCard } from '@/components/ui/AnimatedCard';
-import { AnimatedProgressBar } from '@/components/ui/AnimatedProgressBar';
 import { TypewriterText } from '@/components/ui/TypewriterText';
 import { ParticleBackground } from '@/components/ui/ParticleBackground';
 import { ScrollProgress } from '@/components/ui/ScrollProgress';
@@ -16,20 +15,26 @@ import { TestimonialsSection } from '@/components/sections/TestimonialsSection';
 import { ProjectModal } from '@/components/ui/ProjectModal';
 import { EducationButton } from '@/components/ui/EducationButton';
 import { EducationModal } from '@/components/ui/EducationModal';
+import { SkillCard } from '@/components/ui/SkillCard';
+import { SkillModal } from '@/components/ui/SkillModal';
+import { SkillErrorBoundary } from '@/components/ui/SkillErrorBoundary';
+import { EnhancedSkill, Project } from '@/lib/types/portfolio';
 
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState('home');
-  const [selectedProject, setSelectedProject] = useState(null);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEducationModalOpen, setIsEducationModalOpen] = useState(false);
-  const { personal, about, skills, skillCategories, projects, experience, education, social } = usePortfolio();
+  const [selectedSkill, setSelectedSkill] = useState<EnhancedSkill | null>(null);
+  const [isSkillModalOpen, setIsSkillModalOpen] = useState(false);
+  const { personal, about, skills, skillCategories, enhancedSkills, projects, experience, education, social } = usePortfolio();
 
   const scrollToSection = (sectionId: string) => {
     setActiveSection(sectionId);
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const openProjectModal = (project: any) => {
+  const openProjectModal = (project: Project) => {
     setSelectedProject(project);
     setIsModalOpen(true);
   };
@@ -45,6 +50,16 @@ export default function Portfolio() {
 
   const closeEducationModal = () => {
     setIsEducationModalOpen(false);
+  };
+
+  const openSkillModal = (skill: EnhancedSkill) => {
+    setSelectedSkill(skill);
+    setIsSkillModalOpen(true);
+  };
+
+  const closeSkillModal = () => {
+    setIsSkillModalOpen(false);
+    setSelectedSkill(null);
   };
 
   const typewriterTexts = [
@@ -217,15 +232,19 @@ export default function Portfolio() {
           
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <AnimatedSection direction="left">
-              <motion.p 
-                className="text-lg text-muted-foreground leading-relaxed mb-8"
+              <motion.div 
+                className="text-lg text-muted-foreground leading-relaxed mb-8 space-y-4"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
-                {about}
-              </motion.p>
+                {about.split('\n\n').map((paragraph, index) => (
+                  <p key={index} className="text-lg text-muted-foreground leading-relaxed">
+                    {paragraph}
+                  </p>
+                ))}
+              </motion.div>
 
               {/* Education Button */}
               <motion.div
@@ -237,36 +256,9 @@ export default function Portfolio() {
               >
                 <EducationButton onClick={openEducationModal} />
               </motion.div>
-              
-              <motion.div 
-                className="space-y-4"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-              >
-                {[
-                  { label: 'Email', value: personal.email },
-                  { label: 'Telefone', value: personal.phone },
-                  { label: 'Localização', value: personal.location }
-                ].map((item, index) => (
-                  <motion.div
-                    key={item.label}
-                    className="flex items-center space-x-3 p-3 rounded-lg bg-card/50 border border-border/50"
-                    initial={{ opacity: 0, x: -30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
-                    whileHover={{ scale: 1.02, x: 5 }}
-                  >
-                    <span className="font-semibold text-primary min-w-[100px]">{item.label}:</span>
-                    <span className="text-muted-foreground">{item.value}</span>
-                  </motion.div>
-                ))}
-              </motion.div>
             </AnimatedSection>
             
-            <AnimatedSection direction="right" className="flex justify-center">
+            <AnimatedSection direction="right" className="flex justify-center items-center">
               <ProfileAvatar 
                 section="about"
                 size="xl"
@@ -290,62 +282,49 @@ export default function Portfolio() {
             </p>
           </AnimatedSection>
 
-          {/* Skills with progress bars */}
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
-            {skillCategories && skillCategories.length > 0 ? (
-              skillCategories.slice(0, 2).flatMap(category => 
-                category.skills.slice(0, 3)
-              ).map((skillItem, index) => (
-                <AnimatedProgressBar
-                  key={skillItem.name}
-                  label={skillItem.name}
-                  percentage={skillItem.proficiency}
-                  color={skillItem.color}
+          {/* Enhanced Skills Grid */}
+          {enhancedSkills && enhancedSkills.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {enhancedSkills.map((skill, index) => (
+                <AnimatedSection
+                  key={skill.id}
+                  direction="up"
                   delay={index * 0.1}
-                />
-              ))
-            ) : (
-              [
-                { skill: 'PFMEA', percentage: 95, color: 'blue' as const },
-                { skill: 'APQP', percentage: 90, color: 'green' as const },
-                { skill: 'Mapeamento de Processos', percentage: 90, color: 'purple' as const },
-                { skill: 'Gestão de Projetos', percentage: 85, color: 'orange' as const },
-                { skill: 'Comunicação Estratégica', percentage: 90, color: 'red' as const },
-                { skill: 'Controle de Indicadores', percentage: 90, color: 'blue' as const }
-              ].map((item, index) => (
-                <AnimatedProgressBar
-                  key={item.skill}
-                  label={item.skill}
-                  percentage={item.percentage}
-                  color={item.color}
-                  delay={index * 0.1}
-                />
-              ))
-            )}
-          </div>
-
-          {/* Skills grid */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {skills.map((skill, index) => (
-              <AnimatedCard
-                key={index}
-                className="bg-card border border-border p-4 rounded-lg shadow-md text-center"
-                hoverScale={1.05}
-                tiltIntensity={5}
-                glowEffect
-              >
-                <motion.span 
-                  className="text-foreground font-medium"
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.05 }}
                 >
-                  {skill}
-                </motion.span>
-              </AnimatedCard>
-            ))}
-          </div>
+                  <SkillErrorBoundary>
+                    <SkillCard
+                      skill={skill}
+                      onClick={openSkillModal}
+                      index={index}
+                    />
+                  </SkillErrorBoundary>
+                </AnimatedSection>
+              ))}
+            </div>
+          ) : (
+            /* Fallback to original skills grid if enhancedSkills not available */
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+              {skills.map((skill, index) => (
+                <AnimatedCard
+                  key={index}
+                  className="bg-card border border-border p-4 rounded-lg shadow-md text-center"
+                  hoverScale={1.05}
+                  tiltIntensity={5}
+                  glowEffect
+                >
+                  <motion.span 
+                    className="text-foreground font-medium"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.05 }}
+                  >
+                    {skill}
+                  </motion.span>
+                </AnimatedCard>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -646,6 +625,13 @@ export default function Portfolio() {
         educationData={education}
         isOpen={isEducationModalOpen}
         onClose={closeEducationModal}
+      />
+
+      {/* Skill Modal */}
+      <SkillModal 
+        skill={selectedSkill}
+        isOpen={isSkillModalOpen}
+        onClose={closeSkillModal}
       />
 
       {/* Footer */}

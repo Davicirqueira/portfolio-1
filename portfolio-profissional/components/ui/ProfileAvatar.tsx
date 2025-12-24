@@ -7,7 +7,7 @@ import { profileAvatarVariants, shimmerVariants } from '@/lib/config/animations'
 
 export interface ProfileAvatarProps {
   section: 'about' | 'hero' | 'other';
-  size?: 'sm' | 'md' | 'lg' | 'xl';
+  size?: 'sm' | 'md' | 'lg' | 'xl' | '2xl';
   className?: string;
   showPhoto?: boolean;
   enableAnimations?: boolean;
@@ -23,7 +23,8 @@ const sizeClasses = {
   sm: 'w-16 h-16 text-lg',
   md: 'w-24 h-24 text-2xl',
   lg: 'w-32 h-32 text-4xl md:w-40 md:h-40 md:text-5xl',
-  xl: 'w-48 h-48 text-5xl md:w-64 md:h-64 md:text-6xl'
+  xl: 'w-48 h-48 text-5xl md:w-64 md:h-64 md:text-6xl',
+  '2xl': 'w-56 h-56 text-6xl md:w-80 md:h-80 md:text-7xl'
 };
 
 const animationVariants = profileAvatarVariants;

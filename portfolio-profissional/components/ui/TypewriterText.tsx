@@ -14,10 +14,19 @@ interface TypewriterTextProps {
 export function TypewriterText({
   texts,
   className = '',
-  speed = 100,
-  deleteSpeed = 50,
-  pauseDuration = 2000
+  speed = 60,
+  deleteSpeed = 30,
+  pauseDuration = 1500
 }: TypewriterTextProps) {
+  // Parameter validation with fallback to safe defaults
+  const validateParam = (value: number | undefined, defaultValue: number): number => {
+    return (typeof value === 'number' && value > 0) ? value : defaultValue;
+  };
+
+  const validatedSpeed = validateParam(speed, 60);
+  const validatedDeleteSpeed = validateParam(deleteSpeed, 30);
+  const validatedPauseDuration = validateParam(pauseDuration, 1500);
+
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [currentText, setCurrentText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
@@ -33,7 +42,7 @@ export function TypewriterText({
           setCurrentText(currentFullText.slice(0, currentText.length + 1));
         } else {
           // Finished typing, wait then start deleting
-          setTimeout(() => setIsDeleting(true), pauseDuration);
+          setTimeout(() => setIsDeleting(true), validatedPauseDuration);
         }
       } else {
         // Deleting
@@ -45,10 +54,10 @@ export function TypewriterText({
           setCurrentTextIndex((prev) => (prev + 1) % texts.length);
         }
       }
-    }, isDeleting ? deleteSpeed : speed);
+    }, isDeleting ? validatedDeleteSpeed : validatedSpeed);
 
     return () => clearTimeout(timeout);
-  }, [currentText, currentTextIndex, isDeleting, texts, speed, deleteSpeed, pauseDuration]);
+  }, [currentText, currentTextIndex, isDeleting, texts, validatedSpeed, validatedDeleteSpeed, validatedPauseDuration]);
 
   // Cursor blinking effect
   useEffect(() => {

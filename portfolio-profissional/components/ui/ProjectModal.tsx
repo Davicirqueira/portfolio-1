@@ -3,19 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronRight } from 'lucide-react';
 import { useEffect, useState, useRef } from 'react';
-
-interface Project {
-  id: string;
-  title: string;
-  description: string;
-  longDescription: string;
-  technologies: string[];
-  githubUrl?: string;
-  demoUrl?: string;
-  featured: boolean;
-  category: string;
-  completedAt: string;
-}
+import { Project } from '@/lib/types/portfolio';
 
 interface ProjectModalProps {
   project: Project | null;
@@ -26,21 +14,43 @@ interface ProjectModalProps {
 export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
   const [showResults, setShowResults] = useState(false);
   const resultsRef = useRef<HTMLDivElement>(null);
+  const scrollPositionRef = useRef<number>(0);
 
-  // Fechar modal com ESC
+  // Fechar modal com ESC e gerenciar scroll
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
     };
     
     if (isOpen) {
+      // Salvar posição atual do scroll antes de abrir o modal
+      scrollPositionRef.current = window.pageYOffset || document.documentElement.scrollTop;
+      
       document.addEventListener('keydown', handleEsc);
       document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollPositionRef.current}px`;
+      document.body.style.width = '100%';
+    } else {
+      // Restaurar scroll quando modal fecha
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      
+      // Restaurar posição do scroll
+      window.scrollTo(0, scrollPositionRef.current);
     }
     
     return () => {
       document.removeEventListener('keydown', handleEsc);
-      document.body.style.overflow = 'unset';
+      // Cleanup caso o componente seja desmontado
+      if (isOpen) {
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+      }
     };
   }, [isOpen, onClose]);
 
@@ -51,14 +61,21 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
     }
   }, [isOpen]);
 
-  // Scroll suave para resultados
+  // Scroll suave para resultados (apenas dentro do modal)
   const handleShowResults = () => {
     setShowResults(true);
     setTimeout(() => {
-      resultsRef.current?.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      });
+      if (resultsRef.current) {
+        // Scroll apenas dentro do modal, não na página principal
+        const modalContainer = resultsRef.current.closest('.overflow-y-auto');
+        if (modalContainer) {
+          const elementTop = resultsRef.current.offsetTop;
+          modalContainer.scrollTo({ 
+            top: elementTop - 20, // 20px de margem
+            behavior: 'smooth'
+          });
+        }
+      }
     }, 300);
   };
 
@@ -117,23 +134,24 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Backdrop com blur */}
+          {/* Backdrop com blur aprimorado */}
           <motion.div
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50"
+            className="fixed inset-0 modal-backdrop-enhanced z-50"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
             onClick={onClose}
           />
           
           {/* Modal */}
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
             <motion.div
-              className="bg-card border border-border rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+              className="modal-container-enhanced rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              transition={{ duration: 0.3, ease: 'easeOut' }}
+              transition={{ duration: 0.4, ease: 'easeOut' }}
             >
               {/* Header */}
               <div className="flex items-center justify-between p-6 border-b border-border">
@@ -198,7 +216,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                 >
                   <h3 className="text-lg font-semibold text-foreground mb-2">Detalhes do Projeto</h3>
                   <p className="text-muted-foreground leading-relaxed">
-                    {project.longDescription}
+                    {project.longDescription || project.description}
                   </p>
                 </motion.div>
 
