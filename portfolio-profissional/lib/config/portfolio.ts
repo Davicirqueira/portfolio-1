@@ -25,21 +25,21 @@ export const portfolioConfig: PortfolioConfig = {
       id: 'automotive-quality',
       name: 'Qualidade e Processos Automotivos',
       skills: [
-        { name: 'PFMEA', proficiency: 95, color: 'blue' },
-        { name: 'APQP', proficiency: 90, color: 'green' },
-        { name: 'Plano de Controle', proficiency: 90, color: 'purple' },
-        { name: 'FAST', proficiency: 85, color: 'orange' },
-        { name: 'OMP', proficiency: 85, color: 'red' },
-        { name: 'SMP', proficiency: 85, color: 'blue' }
+        { name: 'PFMEA', proficiency: 100, color: 'green' },
+        { name: 'APQP', proficiency: 100, color: 'green' },
+        { name: 'Plano de Controle', proficiency: 100, color: 'green' },
+        { name: 'FAST', proficiency: 85, color: 'green' },
+        { name: 'OMP', proficiency: 85, color: 'green' },
+        { name: 'SMP', proficiency: 85, color: 'green' }
       ]
     },
     {
       id: 'process-analysis',
       name: 'Análise e Melhoria de Processos',
       skills: [
-        { name: 'Mapeamento de Processos', proficiency: 90, color: 'green' },
-        { name: 'Controles Visuais', proficiency: 85, color: 'purple' },
-        { name: 'Melhoria Contínua', proficiency: 90, color: 'orange' },
+        { name: 'Mapeamento de Processos', proficiency: 100, color: 'green' },
+        { name: 'Controles Visuais', proficiency: 100, color: 'green' },
+        { name: 'Melhoria Contínua', proficiency: 100, color: 'green' },
         { name: 'Padronização de Processos', proficiency: 85, color: 'red' }
       ]
     },

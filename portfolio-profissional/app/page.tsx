@@ -51,7 +51,7 @@ export default function Portfolio() {
     personal.title,
     'Especialista em APQP',
     'Especialista em PFMEA',
-    'Arquiteto de Soluções'
+    'Foco em Resoluções de Problemas'
   ];
 
   return (
