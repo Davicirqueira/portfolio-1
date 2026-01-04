@@ -53,3 +53,21 @@ export function throttle<T extends (...args: any[]) => any>(
     }
   };
 }
+export function resolveSectionId(navigationId: string): string {
+  const mapping: Record<string, string> = {
+    'home': 'home',
+    'sobre': 'sobre', 
+    'habilidades': 'habilidades',
+    'projetos': 'projetos',
+    'experiencia': 'experiencia',
+    'depoimentos': 'depoimentos',
+    'contato': 'contato'
+  };
+  
+  return mapping[navigationId] || navigationId;
+}
+
+export function validateSectionExists(sectionId: string): boolean {
+  const element = document.getElementById(resolveSectionId(sectionId));
+  return element !== null;
+}

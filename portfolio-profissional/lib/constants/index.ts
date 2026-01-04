@@ -5,10 +5,20 @@ export const NAVIGATION_SECTIONS = [
   { id: 'habilidades', label: 'Habilidades' },
   { id: 'projetos', label: 'Projetos' },
   { id: 'experiencia', label: 'Experiência' },
-  { id: 'educacao', label: 'Educação' },
   { id: 'depoimentos', label: 'Depoimentos' },
   { id: 'contato', label: 'Contato' },
 ] as const;
+
+// Section ID mapping for cases where HTML IDs might differ from navigation IDs
+export const SECTION_ID_MAPPING = {
+  'home': 'home',
+  'sobre': 'sobre', 
+  'habilidades': 'habilidades',
+  'projetos': 'projetos',
+  'experiencia': 'experiencia', // HTML uses 'experiencia' (without accent)
+  'depoimentos': 'depoimentos',
+  'contato': 'contato'
+} as const;
 
 // Animation durations
 export const ANIMATION_DURATION = {

@@ -21,7 +21,7 @@ export function TestimonialsSection() {
   if (!testimonials.length) return null;
 
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-muted/30 relative overflow-hidden">
+    <section id="depoimentos" className="py-16 px-4 sm:px-6 lg:px-8 bg-muted/30 relative overflow-hidden">
       <div className="max-w-6xl mx-auto">
         <AnimatedSection direction="up" className="text-center mb-12">
           <h2 className="text-3xl font-bold text-foreground mb-4">

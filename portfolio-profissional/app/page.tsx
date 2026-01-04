@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { usePortfolio } from '@/lib/hooks/usePortfolio';
 import { AnimatedSection } from '@/components/ui/AnimatedSection';
@@ -29,9 +29,37 @@ export default function Portfolio() {
   const [isSkillModalOpen, setIsSkillModalOpen] = useState(false);
   const { personal, about, skills, skillCategories, enhancedSkills, projects, experience, education, social } = usePortfolio();
 
+  // Auto-detect active section on scroll
+  React.useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['home', 'sobre', 'habilidades', 'projetos', 'experiencia', 'depoimentos', 'contato'];
+      const scrollPosition = window.scrollY + 100;
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const element = document.getElementById(sections[i]);
+        if (element && scrollPosition >= element.offsetTop) {
+          setActiveSection(sections[i]);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const scrollToSection = (sectionId: string) => {
     setActiveSection(sectionId);
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const navHeight = 80; // Height of fixed navigation
+      const elementPosition = element.offsetTop - navHeight;
+      
+      window.scrollTo({
+        top: Math.max(0, elementPosition),
+        behavior: 'smooth'
+      });
+    }
   };
 
   const openProjectModal = (project: Project) => {
@@ -62,6 +90,9 @@ export default function Portfolio() {
     setSelectedSkill(null);
   };
 
+  // Get section label for screen reader announcements
+  const activeSectionLabel = '';
+
   const typewriterTexts = [
     personal.title,
     'Especialista em APQP',
@@ -91,7 +122,7 @@ export default function Portfolio() {
               {personal.name}
             </motion.div>
             <div className="hidden md:flex items-center space-x-8">
-              {['home', 'sobre', 'habilidades', 'projetos', 'experiência', 'contato'].map((item, index) => (
+              {['home', 'sobre', 'habilidades', 'projetos', 'experiencia', 'depoimentos', 'contato'].map((item, index) => (
                 <motion.button
                   key={item}
                   onClick={() => scrollToSection(item)}
@@ -423,7 +454,7 @@ export default function Portfolio() {
       </section>
 
       {/* Experience Section */}
-      <section id="experiência" className="py-16 px-4 sm:px-6 lg:px-8">
+      <section id="experiencia" className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <AnimatedSection direction="up" className="text-center mb-12">
             <h2 className="text-3xl font-bold text-foreground mb-4">
