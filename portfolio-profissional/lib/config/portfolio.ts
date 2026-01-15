@@ -451,10 +451,8 @@ export const portfolioConfig: PortfolioConfig = {
   ],
 
   social: {
-    github: "https://github.com/seuusuario",
-    linkedin: "https://linkedin.com/in/seuusuario",
-    twitter: "https://twitter.com/seuusuario",
-    website: "https://seusite.com"
+    linkedin: "https://linkedin.com/in/gilberto-nascimento",
+    twitter: "https://twitter.com/gilberto_eng"
   },
 
   seo: {

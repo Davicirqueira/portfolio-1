@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { Mail, Phone, MapPin } from 'lucide-react';
 import { usePortfolio } from '@/lib/hooks/usePortfolio';
 import { AnimatedSection } from '@/components/ui/AnimatedSection';
 import { AnimatedCard } from '@/components/ui/AnimatedCard';
@@ -18,6 +19,7 @@ import { EducationModal } from '@/components/ui/EducationModal';
 import { SkillCard } from '@/components/ui/SkillCard';
 import { SkillModal } from '@/components/ui/SkillModal';
 import { SkillErrorBoundary } from '@/components/ui/SkillErrorBoundary';
+import { SocialIcons } from '@/components/ui/SocialIcons';
 import { EnhancedSkill, Project } from '@/lib/types/portfolio';
 
 export default function Portfolio() {
@@ -552,54 +554,22 @@ export default function Portfolio() {
         <div className="max-w-6xl mx-auto text-center relative z-10">
           <AnimatedSection direction="up">
             <h2 className="text-3xl font-bold text-foreground mb-4">
-              Vamos Trabalhar Juntos?
+              Vamos Otimizar Seus Processos?
             </h2>
             <div className="w-20 h-1 bg-primary mx-auto rounded-full mb-8" />
             <p className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto">
-              Interessado em trabalhar juntos? Vamos conversar sobre seu próximo projeto!
+              Interessado em implementar metodologias de qualidade e otimização de processos? Vamos conversar sobre como posso contribuir em seus projetos e melhorias.
             </p>
           </AnimatedSection>
           
           <AnimatedSection direction="up" delay={0.2}>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-8">
-              <motion.a 
-                href={`mailto:${personal.email}`}
-                className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 rounded-lg transition-colors font-medium relative overflow-hidden group"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <span className="relative z-10">Enviar Email</span>
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-primary to-purple-600"
-                  initial={{ x: '-100%' }}
-                  whileHover={{ x: 0 }}
-                  transition={{ duration: 0.3 }}
-                />
-              </motion.a>
-              
-              <div className="flex gap-6">
-                {[
-                  { href: social.github, label: 'GitHub' },
-                  { href: social.linkedin, label: 'LinkedIn' },
-                  { href: social.twitter, label: 'Twitter' }
-                ].filter(item => item.href).map((item, index) => (
-                  <motion.a
-                    key={item.label}
-                    href={item.href}
-                    className="text-muted-foreground hover:text-primary transition-colors font-medium px-4 py-2 rounded-lg hover:bg-card/50"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    {item.label}
-                  </motion.a>
-                ))}
-              </div>
+            <div className="mb-12">
+              <SocialIcons 
+                email={personal.email}
+                linkedin={social.linkedin}
+                twitter={social.twitter}
+                iconSize="lg"
+              />
             </div>
           </AnimatedSection>
           
@@ -607,9 +577,9 @@ export default function Portfolio() {
           <AnimatedSection direction="up" delay={0.4}>
             <div className="grid md:grid-cols-3 gap-6 mt-12">
               {[
-                { label: 'Email', value: personal.email, icon: '📧' },
-                { label: 'Telefone', value: personal.phone, icon: '📱' },
-                { label: 'Localização', value: personal.location, icon: '📍' }
+                { label: 'Email', value: personal.email, Icon: Mail, color: 'text-[#EA4335]' },
+                { label: 'Telefone', value: personal.phone, Icon: Phone, color: 'text-[#0A66C2]' },
+                { label: 'Localização', value: personal.location, Icon: MapPin, color: 'text-[#1DA1F2]' }
               ].map((item, index) => (
                 <motion.div
                   key={item.label}
@@ -620,7 +590,9 @@ export default function Portfolio() {
                   transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
                   whileHover={{ scale: 1.05, y: -5 }}
                 >
-                  <div className="text-3xl mb-3">{item.icon}</div>
+                  <div className={`flex justify-center mb-3 ${item.color}`}>
+                    <item.Icon size={32} strokeWidth={2} />
+                  </div>
                   <h3 className="font-semibold text-foreground mb-2">{item.label}</h3>
                   <p className="text-muted-foreground text-sm">{item.value}</p>
                 </motion.div>
@@ -681,7 +653,7 @@ export default function Portfolio() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            © 2025 {personal.name}. Todos os direitos reservados.
+            © 2026 {personal.name}. Todos os direitos reservados.
           </motion.p>
           <motion.div
             className="mt-4 text-sm text-muted-foreground/70"

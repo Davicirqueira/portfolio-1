@@ -29,10 +29,8 @@ export interface PersonalInfo {
 }
 
 export interface SocialLinks {
-  github?: string;
   linkedin?: string;
   twitter?: string;
-  website?: string;
 }
 
 export interface Project {

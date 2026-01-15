@@ -230,33 +230,7 @@ export function EducationModal({ educationData, isOpen, onClose }: EducationModa
                         </motion.div>
                       )}
 
-                      {/* Verification URL */}
-                      {education.verificationUrl && (
-                        <motion.div 
-                          className="mt-4 pt-4 border-t border-border/50"
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: 0.75 + index * 0.1 }}
-                        >
-                          <motion.a
-                            href={education.verificationUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors text-sm font-medium"
-                            whileHover={{ 
-                              scale: 1.02,
-                              transition: { duration: 0.15 }
-                            }}
-                            whileTap={{ 
-                              scale: 0.98,
-                              transition: { duration: 0.1 }
-                            }}
-                          >
-                            <ExternalLink className="w-4 h-4" />
-                            Verificar Certificação
-                          </motion.a>
-                        </motion.div>
-                      )}
+
 
                       {/* Hover effect overlay */}
                       <motion.div
