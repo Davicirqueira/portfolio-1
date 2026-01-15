@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { AnimatedCard } from './AnimatedCard';
 import { EnhancedSkill } from '@/lib/types/portfolio';
 
 interface SkillCardProps {
@@ -10,41 +9,11 @@ interface SkillCardProps {
   index: number;
 }
 
-interface ColorScheme {
-  gradient: string;
-  border: string;
-  name: 'blue' | 'green' | 'orange' | 'purple';
-}
-
-// Color distribution: 3 blue, 3 green, 3 orange, 3 purple
-const COLOR_DISTRIBUTION: ColorScheme[] = [
-  // 3 blue cards (indices 0, 1, 2)
-  { gradient: 'from-blue-500/20 to-blue-600/20', border: 'border-blue-500/30', name: 'blue' },
-  { gradient: 'from-blue-500/20 to-blue-600/20', border: 'border-blue-500/30', name: 'blue' },
-  { gradient: 'from-blue-500/20 to-blue-600/20', border: 'border-blue-500/30', name: 'blue' },
-  
-  // 3 green cards (indices 3, 4, 5)
-  { gradient: 'from-green-500/20 to-green-600/20', border: 'border-green-500/30', name: 'green' },
-  { gradient: 'from-green-500/20 to-green-600/20', border: 'border-green-500/30', name: 'green' },
-  { gradient: 'from-green-500/20 to-green-600/20', border: 'border-green-500/30', name: 'green' },
-  
-  // 3 orange cards (indices 6, 7, 8)
-  { gradient: 'from-orange-500/20 to-orange-600/20', border: 'border-orange-500/30', name: 'orange' },
-  { gradient: 'from-orange-500/20 to-orange-600/20', border: 'border-orange-500/30', name: 'orange' },
-  { gradient: 'from-orange-500/20 to-orange-600/20', border: 'border-orange-500/30', name: 'orange' },
-  
-  // 3 purple cards (indices 9, 10, 11)
-  { gradient: 'from-purple-500/20 to-purple-600/20', border: 'border-purple-500/30', name: 'purple' },
-  { gradient: 'from-purple-500/20 to-purple-600/20', border: 'border-purple-500/30', name: 'purple' },
-  { gradient: 'from-purple-500/20 to-purple-600/20', border: 'border-purple-500/30', name: 'purple' }
-];
-
-const getCardColorByIndex = (index: number): ColorScheme => {
-  // Ensure index is within bounds, fallback to gray if out of range
-  if (index < 0 || index >= COLOR_DISTRIBUTION.length) {
-    return { gradient: 'from-gray-500/20 to-gray-600/20', border: 'border-gray-500/30', name: 'blue' };
-  }
-  return COLOR_DISTRIBUTION[index];
+// Cor única elegante para todos os cards - tom slate/azul acinzentado elegante
+const UNIFIED_CARD_STYLE = {
+  gradient: 'from-slate-500/10 via-slate-600/15 to-slate-700/10',
+  border: 'border-slate-500/20',
+  hoverGradient: 'from-slate-400/15 via-slate-500/20 to-slate-600/15'
 };
 
 export function SkillCard({ skill, onClick, index }: SkillCardProps) {
@@ -55,23 +24,23 @@ export function SkillCard({ skill, onClick, index }: SkillCardProps) {
   // Fallback para dados ausentes
   if (!skill || !skill.name) {
     return (
-      <AnimatedCard
+      <motion.div
         className="skill-card-uniform bg-card border border-border rounded-xl p-6 cursor-not-allowed opacity-50"
-        hoverScale={1}
-        tiltIntensity={0}
-        glowEffect={false}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: index * 0.1 }}
       >
         <div className="skill-card-content items-center justify-center">
           <p className="text-muted-foreground text-sm">
             Dados da competência não disponíveis
           </p>
         </div>
-      </AnimatedCard>
+      </motion.div>
     );
   }
 
   // Get color scheme based on index instead of category
-  const colorScheme = getCardColorByIndex(index);
+  const colorScheme = UNIFIED_CARD_STYLE;
 
   const getExpertiseBadgeColor = (level: string) => {
     switch (level) {
@@ -87,11 +56,16 @@ export function SkillCard({ skill, onClick, index }: SkillCardProps) {
   };
 
   return (
-    <AnimatedCard
-      className={`skill-card-uniform bg-gradient-to-br ${colorScheme.gradient} border ${colorScheme.border} rounded-xl p-6 cursor-pointer transition-all duration-300 hover:shadow-lg hover:shadow-primary/10`}
-      hoverScale={1.03}
-      tiltIntensity={3}
-      glowEffect
+    <motion.div
+      className={`skill-card-uniform bg-gradient-to-br ${colorScheme.gradient} border ${colorScheme.border} rounded-xl p-6 cursor-pointer transition-all duration-300 hover:shadow-lg hover:shadow-slate-500/10 relative`}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      whileHover={{ 
+        scale: 1.02,
+        transition: { duration: 0.2 }
+      }}
+      whileTap={{ scale: 0.98 }}
     >
       <motion.div
         className="skill-card-content"
@@ -174,11 +148,11 @@ export function SkillCard({ skill, onClick, index }: SkillCardProps) {
 
         {/* Hover effect overlay */}
         <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-primary/5 to-purple-500/5 rounded-xl opacity-0 pointer-events-none"
+          className={`absolute inset-0 bg-gradient-to-r ${colorScheme.hoverGradient} rounded-xl opacity-0 pointer-events-none`}
           whileHover={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
         />
       </motion.div>
-    </AnimatedCard>
+    </motion.div>
   );
 }

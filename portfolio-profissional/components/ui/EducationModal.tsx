@@ -21,11 +21,14 @@ export function EducationModal({ educationData, isOpen, onClose }: EducationModa
     if (isOpen) {
       document.addEventListener('keydown', handleEsc);
       document.body.style.overflow = 'hidden';
+    } else {
+      // Garantir que o scroll seja sempre restaurado
+      document.body.style.overflow = '';
     }
     
     return () => {
       document.removeEventListener('keydown', handleEsc);
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = '';
     };
   }, [isOpen, onClose]);
 

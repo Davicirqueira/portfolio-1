@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronRight } from 'lucide-react';
 import { useEffect, useState, useRef } from 'react';
 import { Project } from '@/lib/types/portfolio';
+import { useScrollLock } from '@/lib/hooks/useScrollLock';
 
 interface ProjectModalProps {
   project: Project | null;
@@ -14,43 +15,22 @@ interface ProjectModalProps {
 export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
   const [showResults, setShowResults] = useState(false);
   const resultsRef = useRef<HTMLDivElement>(null);
-  const scrollPositionRef = useRef<number>(0);
+  
+  // Usar o hook para gerenciar scroll de forma segura
+  const { forceUnlock } = useScrollLock(isOpen);
 
-  // Fechar modal com ESC e gerenciar scroll
+  // Fechar modal com ESC
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
     };
     
     if (isOpen) {
-      // Salvar posição atual do scroll antes de abrir o modal
-      scrollPositionRef.current = window.pageYOffset || document.documentElement.scrollTop;
-      
       document.addEventListener('keydown', handleEsc);
-      document.body.style.overflow = 'hidden';
-      document.body.style.position = 'fixed';
-      document.body.style.top = `-${scrollPositionRef.current}px`;
-      document.body.style.width = '100%';
-    } else {
-      // Restaurar scroll quando modal fecha
-      document.body.style.overflow = '';
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.width = '';
-      
-      // Restaurar posição do scroll
-      window.scrollTo(0, scrollPositionRef.current);
     }
     
     return () => {
       document.removeEventListener('keydown', handleEsc);
-      // Cleanup caso o componente seja desmontado
-      if (isOpen) {
-        document.body.style.overflow = '';
-        document.body.style.position = '';
-        document.body.style.top = '';
-        document.body.style.width = '';
-      }
     };
   }, [isOpen, onClose]);
 

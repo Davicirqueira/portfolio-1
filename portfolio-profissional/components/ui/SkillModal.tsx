@@ -32,11 +32,14 @@ export function SkillModal({ skill, isOpen, onClose }: SkillModalProps) {
       setTimeout(() => {
         modalRef.current?.focus();
       }, 100);
+    } else {
+      // Garantir que o scroll seja sempre restaurado
+      document.body.style.overflow = '';
     }
     
     return () => {
       document.removeEventListener('keydown', handleEsc);
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = '';
       
       // Retornar foco para o elemento original quando fechar
       if (!isOpen && previousFocusRef.current) {
