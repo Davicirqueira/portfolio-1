@@ -49,7 +49,7 @@ export function EducationModal({ educationData, isOpen, onClose }: EducationModa
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -60,7 +60,7 @@ export function EducationModal({ educationData, isOpen, onClose }: EducationModa
           
           {/* Modal */}
           <motion.div
-            className="relative bg-card border border-border rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+            className="relative bg-card border border-border rounded-xl shadow-2xl w-full max-w-4xl max-h-[95vh] sm:max-h-[90vh] overflow-y-auto"
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -68,19 +68,19 @@ export function EducationModal({ educationData, isOpen, onClose }: EducationModa
             onClick={(e) => e.stopPropagation()}
           >
               {/* Header */}
-              <div className="flex items-center justify-between p-6 border-b border-border">
+              <div className="flex items-center justify-between p-4 sm:p-6 border-b border-border">
                 <div>
                   <motion.h2 
-                    className="text-2xl font-bold text-foreground flex items-center gap-2"
+                    className="text-xl sm:text-2xl font-bold text-foreground flex items-center gap-2"
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.1 }}
                   >
-                    <Award className="w-6 h-6 text-primary" />
+                    <Award className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
                     Formação Acadêmica e Profissional
                   </motion.h2>
                   <motion.p 
-                    className="text-sm text-muted-foreground mt-1"
+                    className="text-xs sm:text-sm text-muted-foreground mt-1"
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.15 }}
@@ -91,7 +91,7 @@ export function EducationModal({ educationData, isOpen, onClose }: EducationModa
                 
                 <motion.button
                   onClick={onClose}
-                  className="p-2 hover:bg-muted rounded-lg transition-all duration-150"
+                  className="p-2 hover:bg-muted rounded-lg transition-all duration-150 flex-shrink-0"
                   whileHover={{ 
                     scale: 1.1,
                     rotate: 90,
@@ -110,12 +110,12 @@ export function EducationModal({ educationData, isOpen, onClose }: EducationModa
               </div>
 
               {/* Content */}
-              <div className="p-6">
-                <div className="space-y-8">
+              <div className="p-4 sm:p-6">
+                <div className="space-y-6 sm:space-y-8">
                   {educationData.map((education, index) => (
                     <motion.div
                       key={education.id}
-                      className="relative bg-muted/30 border border-border/50 rounded-lg p-6"
+                      className="relative bg-muted/30 border border-border/50 rounded-lg p-4 sm:p-6"
                       initial={{ opacity: 0, y: 30 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.3 + index * 0.1 }}
@@ -126,10 +126,10 @@ export function EducationModal({ educationData, isOpen, onClose }: EducationModa
                       }}
                     >
                       {/* Institution and Degree */}
-                      <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
-                        <div className="flex-1">
+                      <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start mb-3 sm:mb-4">
+                        <div className="flex-1 mb-2 lg:mb-0">
                           <motion.h3 
-                            className="text-xl font-bold text-foreground mb-1"
+                            className="text-lg sm:text-xl font-bold text-foreground mb-1"
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.4 + index * 0.1 }}
@@ -137,28 +137,28 @@ export function EducationModal({ educationData, isOpen, onClose }: EducationModa
                             {education.institution}
                           </motion.h3>
                           <motion.div 
-                            className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2"
+                            className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mb-2"
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.45 + index * 0.1 }}
                           >
-                            <span className="text-primary font-semibold">
+                            <span className="text-sm sm:text-base text-primary font-semibold">
                               {education.degree}
                             </span>
                             <span className="hidden sm:block text-muted-foreground">•</span>
-                            <span className="text-muted-foreground">
+                            <span className="text-sm sm:text-base text-muted-foreground">
                               {education.field}
                             </span>
                           </motion.div>
                         </div>
                         
                         <motion.div 
-                          className="flex items-center gap-2 text-muted-foreground mt-2 md:mt-0 bg-card/50 px-3 py-1 rounded-full text-sm"
+                          className="flex items-center gap-2 text-muted-foreground bg-card/50 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm self-start"
                           initial={{ opacity: 0, scale: 0 }}
                           animate={{ opacity: 1, scale: 1 }}
                           transition={{ delay: 0.5 + index * 0.1 }}
                         >
-                          <Calendar className="w-4 h-4" />
+                          <Calendar className="w-3 h-3 sm:w-4 sm:h-4" />
                           {formatPeriod(education.startDate, education.endDate)}
                         </motion.div>
                       </div>

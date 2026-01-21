@@ -114,7 +114,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -126,7 +126,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
           
           {/* Modal */}
           <motion.div
-            className="relative modal-container-enhanced rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+            className="relative modal-container-enhanced rounded-xl shadow-2xl w-full max-w-2xl max-h-[95vh] sm:max-h-[90vh] overflow-y-auto"
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -134,10 +134,10 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
             onClick={(e) => e.stopPropagation()}
           >
               {/* Header */}
-              <div className="flex items-center justify-between p-6 border-b border-border">
-                <div>
+              <div className="flex items-center justify-between p-4 sm:p-6 border-b border-border">
+                <div className="flex-1 min-w-0">
                   <motion.h2 
-                    className="text-2xl font-bold text-foreground"
+                    className="text-xl sm:text-2xl font-bold text-foreground truncate"
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.1 }}
@@ -145,7 +145,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                     {project.title}
                   </motion.h2>
                   <motion.p 
-                    className="text-sm text-muted-foreground mt-1"
+                    className="text-xs sm:text-sm text-muted-foreground mt-1"
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.15 }}
@@ -156,7 +156,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                 
                 <motion.button
                   onClick={onClose}
-                  className="p-2 hover:bg-muted rounded-lg transition-all duration-150"
+                  className="p-2 hover:bg-muted rounded-lg transition-all duration-150 flex-shrink-0 ml-2"
                   whileHover={{ 
                     scale: 1.1,
                     rotate: 90,
@@ -175,7 +175,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
               </div>
 
               {/* Content */}
-              <div className="p-6 space-y-6">
+              <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
                 {/* Descrição resumida */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
