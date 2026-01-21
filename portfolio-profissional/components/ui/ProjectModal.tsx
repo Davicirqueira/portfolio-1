@@ -113,26 +113,26 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
   return (
     <AnimatePresence>
       {isOpen && (
-        <>
+        <motion.div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.4, ease: 'easeOut' }}
+          onClick={onClose}
+        >
           {/* Backdrop com blur aprimorado */}
-          <motion.div
-            className="fixed inset-0 modal-backdrop-enhanced z-50"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.4, ease: 'easeOut' }}
-            onClick={onClose}
-          />
+          <div className="absolute inset-0 modal-backdrop-enhanced" />
           
           {/* Modal */}
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-            <motion.div
-              className="modal-container-enhanced rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              transition={{ duration: 0.4, ease: 'easeOut' }}
-            >
+          <motion.div
+            className="relative modal-container-enhanced rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
+            onClick={(e) => e.stopPropagation()}
+          >
               {/* Header */}
               <div className="flex items-center justify-between p-6 border-b border-border">
                 <div>
@@ -361,8 +361,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                 </AnimatePresence>
               </div>
             </motion.div>
-          </div>
-        </>
+        </motion.div>
       )}
     </AnimatePresence>
   );
