@@ -1,0 +1,93 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      String   @default("admin")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  auditLogs AuditLog[]
+  @@map("users")
+}
+
+model PortfolioData {
+  id           String   @id @default(cuid())
+  version      Int      @default(1)
+  data         Json
+  isPublished  Boolean  @default(false)
+  lastModified DateTime @default(now())
+  modifiedBy   String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  
+  @@map("portfolio_data")
+}
+
+model DynamicModal {
+  id        String   @id @default(cuid())
+  type      String
+  title     String
+  content   Json
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@map("dynamic_modals")
+}
+
+model MediaFile {
+  id          String   @id @default(cuid())
+  filename    String
+  originalName String
+  url         String
+  publicId    String?
+  category    String
+  size        Int
+  mimeType    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("media_files")
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  userId    String
+  action    String
+  section   String
+  oldData   Json?
+  newData   Json?
+  timestamp DateTime @default(now())
+  ipAddress String
+  userAgent String
+  
+  user User @relation(fields: [userId], references: [id])
+  @@map("audit_logs")
+}
+
+model AdminSettings {
+  id                  String   @id @default(cuid())
+  autoSave           Boolean  @default(true)
+  autoSaveInterval   Int      @default(30)
+  requirePreview     Boolean  @default(false)
+  backupRetention    Int      @default(30)
+  allowedImageFormats String[] @default(["jpg", "jpeg", "png", "webp"])
+  maxImageSize       Int      @default(5)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  
+  @@map("admin_settings")
+}
