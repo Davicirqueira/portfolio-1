@@ -3,39 +3,47 @@
 import { AnimatedSection } from '@/components/ui/AnimatedSection';
 import { AnimatedCounter } from '@/components/ui/AnimatedCounter';
 import { motion } from 'framer-motion';
-
-interface Stat {
-  label: string;
-  value: number;
-  suffix?: string;
-  prefix?: string;
-  decimals?: number;
-}
-
-const stats: Stat[] = [
-  {
-    label: 'PFMEAs Desenvolvidos',
-    value: 50,
-    suffix: '+'
-  },
-  {
-    label: 'Anos de Experiência',
-    value: 8,
-    suffix: '+'
-  },
-  {
-    label: 'Projetos APQP',
-    value: 30,
-    suffix: '+'
-  },
-  {
-    label: 'Conformidade Qualidade',
-    value: 98,
-    suffix: '%'
-  }
-];
+import { usePortfolio } from '@/lib/hooks/usePortfolio';
+import { Statistic } from '@/lib/types/portfolio';
 
 export function StatsSection() {
+  const { statistics } = usePortfolio();
+  
+  // Use dynamic statistics from portfolio data, fallback to default if not available
+  const stats: Statistic[] = statistics || [
+    {
+      id: "pfmeas-developed",
+      label: 'PFMEAs Desenvolvidos',
+      value: 50,
+      suffix: '+',
+      order: 1
+    },
+    {
+      id: "years-experience", 
+      label: 'Anos de Experiência',
+      value: 8,
+      suffix: '+',
+      order: 2
+    },
+    {
+      id: "apqp-projects",
+      label: 'Projetos APQP',
+      value: 30,
+      suffix: '+',
+      order: 3
+    },
+    {
+      id: "quality-compliance",
+      label: 'Conformidade Qualidade',
+      value: 98,
+      suffix: '%',
+      order: 4
+    }
+  ];
+
+  // Sort statistics by order if available
+  const sortedStats = stats.sort((a: Statistic, b: Statistic) => (a.order || 0) - (b.order || 0));
+
   return (
     <section className="py-16 px-4 sm:px-6 lg:px-8 bg-muted/30">
       <div className="max-w-6xl mx-auto">
@@ -49,9 +57,9 @@ export function StatsSection() {
         </AnimatedSection>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {stats.map((stat, index) => (
+          {sortedStats.map((stat: Statistic, index: number) => (
             <motion.div
-              key={stat.label}
+              key={stat.id}
               className="text-center"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}

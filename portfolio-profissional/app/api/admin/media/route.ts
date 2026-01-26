@@ -12,6 +12,10 @@ const mediaFileSchema = z.object({
   category: z.enum(['profile', 'project', 'general']),
   size: z.number().positive(),
   mimeType: z.string().min(1),
+  tags: z.array(z.string()).optional().default([]),
+  usedIn: z.array(z.string()).optional().default([]),
+  isArchived: z.boolean().optional().default(false),
+  description: z.string().optional(),
 })
 
 // GET - Retrieve all media files or filter by category

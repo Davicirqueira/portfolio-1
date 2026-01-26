@@ -427,6 +427,7 @@ export const portfolioConfig: PortfolioConfig = {
       position: "Gerente de Qualidade",
       company: "Magna International",
       content: "Gilberto é um engenheiro excepcional. Sua capacidade de transformar processos complexos em soluções eficientes e sua expertise em PFMEA são impressionantes. Trabalhar com ele elevou nossos padrões de qualidade.",
+      initials: "MS",
       date: "2024-01-15",
       linkedinUrl: "https://linkedin.com/in/mariasilva"
     },
@@ -436,6 +437,7 @@ export const portfolioConfig: PortfolioConfig = {
       position: "Diretor de Manufatura",
       company: "Continental Automotive",
       content: "Durante nosso tempo trabalhando juntos, Gilberto demonstrou não apenas excelência técnica em processos automotivos, mas também liderança e capacidade de implementar melhorias significativas. Recomendo sem hesitação.",
+      initials: "JS",
       date: "2023-12-10",
       linkedinUrl: "https://linkedin.com/in/joaosantos"
     },
@@ -445,10 +447,58 @@ export const portfolioConfig: PortfolioConfig = {
       position: "Engenheira de Processos",
       company: "Bosch Automotive",
       content: "A colaboração com Gilberto foi perfeita. Ele entende profundamente tanto os aspectos técnicos quanto os operacionais, criando soluções que realmente funcionam no chão de fábrica.",
+      initials: "AC",
       date: "2023-10-05",
       linkedinUrl: "https://linkedin.com/in/anacosta"
     }
   ],
+
+  statistics: [
+    {
+      id: "pfmeas-developed",
+      label: "PFMEAs Desenvolvidos",
+      value: 50,
+      suffix: "+",
+      description: "Análises PFMEA completas desenvolvidas em projetos automotivos",
+      order: 1
+    },
+    {
+      id: "years-experience",
+      label: "Anos de Experiência",
+      value: 8,
+      suffix: "+",
+      description: "Anos de experiência em engenharia de processos e qualidade automotiva",
+      order: 2
+    },
+    {
+      id: "apqp-projects",
+      label: "Projetos APQP",
+      value: 30,
+      suffix: "+",
+      description: "Projetos APQP gerenciados com sucesso na indústria automotiva",
+      order: 3
+    },
+    {
+      id: "quality-compliance",
+      label: "Conformidade Qualidade",
+      value: 98,
+      suffix: "%",
+      description: "Taxa de conformidade de qualidade mantida em processos sob gestão",
+      order: 4
+    }
+  ],
+
+  contact: {
+    email: "gilberto.tri@gmail.com",
+    phone: "+55 (11) 99881-0297",
+    location: "São Paulo, Brasil",
+    social: {
+      linkedin: "https://linkedin.com/in/gilberto-nascimento",
+      twitter: "https://twitter.com/gilberto_eng"
+    },
+    availability: "Disponível para novos projetos",
+    preferredContact: "email"
+  },
 
   social: {
     linkedin: "https://linkedin.com/in/gilberto-nascimento",

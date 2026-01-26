@@ -2,13 +2,14 @@
 
 import { useSession, signOut } from "next-auth/react"
 import { usePathname } from "next/navigation"
-import { Menu, LogOut, User, ChevronRight } from "lucide-react"
+import { Menu, LogOut, User, ChevronRight, Keyboard } from "lucide-react"
 import { Button } from "@/components/ui/Button"
 import { ThemeToggle } from "@/components/ui/ThemeToggle"
 import { motion } from "framer-motion"
 
 interface AdminHeaderProps {
   onMenuClick: () => void
+  onShowShortcuts?: () => void
 }
 
 // Breadcrumb mapping
@@ -26,7 +27,7 @@ const breadcrumbMap: Record<string, string[]> = {
   '/admin/dashboard/media': ['Dashboard', 'Mídia'],
 }
 
-export function AdminHeader({ onMenuClick }: AdminHeaderProps) {
+export function AdminHeader({ onMenuClick, onShowShortcuts }: AdminHeaderProps) {
   const { data: session } = useSession()
   const pathname = usePathname()
   
@@ -91,6 +92,25 @@ export function AdminHeader({ onMenuClick }: AdminHeaderProps) {
 
       {/* User menu */}
       <div className="flex items-center gap-x-4 lg:gap-x-6">
+        {/* Keyboard shortcuts button */}
+        {onShowShortcuts && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3, delay: 0.1 }}
+          >
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={onShowShortcuts}
+              className="text-muted-foreground hover:text-foreground hover:bg-muted transition-all duration-200"
+              title="Atalhos do teclado (?)"
+            >
+              <Keyboard className="h-4 w-4" />
+            </Button>
+          </motion.div>
+        )}
+
         {/* Theme toggle */}
         <ThemeToggle />
 

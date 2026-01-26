@@ -103,7 +103,7 @@ export function ProjectModalEditor({ modal, onSave, onCancel }: ProjectModalEdit
   // Carrega os dados do modal quando disponível
   useEffect(() => {
     if (modal) {
-      const data = modal.data || {}
+      const data = modal.content || {}
       reset({
         title: modal.title || "",
         category: data.category || "",
@@ -671,7 +671,7 @@ export function ProjectModalEditor({ modal, onSave, onCancel }: ProjectModalEdit
               
               <ImageUploader
                 onUpload={handleImageUpload}
-                category="projects"
+                category="project"
                 accept="image/*"
                 maxSize={10 * 1024 * 1024} // 10MB
               >

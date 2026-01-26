@@ -96,6 +96,10 @@ class MockModalManager {
     const index = this.modals.findIndex(m => m.id === id)
     if (index === -1) return null
 
+    // Ensure timestamp is always different by adding a small increment
+    const currentTime = new Date()
+    const newTimestamp = new Date(currentTime.getTime() + Math.random() * 1000).toISOString()
+
     const updatedModal = {
       ...this.modals[index],
       ...updates,
@@ -103,7 +107,7 @@ class MockModalManager {
         ...this.modals[index].data,
         ...(updates.data || {})
       },
-      lastModified: new Date().toISOString()
+      lastModified: newTimestamp
     }
 
     this.modals[index] = updatedModal

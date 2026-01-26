@@ -71,7 +71,7 @@ export function TestimonialsSection() {
                 transition={{ duration: 0.5, delay: 0.4 }}
               >
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary text-xl font-bold mb-4">
-                  {testimonials[currentIndex].name.split(' ').map(n => n[0]).join('')}
+                  {testimonials[currentIndex].initials || testimonials[currentIndex].name.split(' ').map(n => n[0]).join('')}
                 </div>
                 <h4 className="text-lg font-semibold text-foreground">
                   {testimonials[currentIndex].name}

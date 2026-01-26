@@ -31,6 +31,20 @@ export interface PersonalInfo {
 export interface SocialLinks {
   linkedin?: string;
   twitter?: string;
+  github?: string;
+  instagram?: string;
+  facebook?: string;
+  youtube?: string;
+  website?: string;
+}
+
+export interface ContactInfo {
+  email: string;
+  phone: string;
+  location: string;
+  social: SocialLinks;
+  availability?: string;
+  preferredContact?: 'email' | 'phone' | 'linkedin';
 }
 
 export interface Project {
@@ -76,6 +90,7 @@ export interface Testimonial {
   position: string;
   company: string;
   content: string;
+  initials?: string;
   avatar?: string;
   linkedinUrl?: string;
   date: string;
@@ -114,6 +129,17 @@ export interface EnhancedSkill {
   keyProjects?: string[];
 }
 
+export interface Statistic {
+  id: string;
+  label: string;
+  value: number;
+  suffix?: string;
+  prefix?: string;
+  decimals?: number;
+  description?: string;
+  order: number;
+}
+
 export interface PortfolioConfig {
   personal: PersonalInfo;
   about: string;
@@ -124,6 +150,8 @@ export interface PortfolioConfig {
   experience: Experience[];
   education: Education[];
   testimonials: Testimonial[];
-  social: SocialLinks;
+  statistics?: Statistic[]; // Statistics/Numbers section
+  contact: ContactInfo; // Dedicated contact section
+  social: SocialLinks; // Kept for backward compatibility
   seo: SEOConfig;
 }

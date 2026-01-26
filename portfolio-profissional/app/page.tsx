@@ -13,6 +13,7 @@ import { ScrollToTop } from '@/components/ui/ScrollToTop';
 import { ProfileAvatar } from '@/components/ui/ProfileAvatar';
 import { StatsSection } from '@/components/sections/StatsSection';
 import { TestimonialsSection } from '@/components/sections/TestimonialsSection';
+import { ContactSection } from '@/components/sections/ContactSection';
 import { ProjectModal } from '@/components/ui/ProjectModal';
 import { EducationButton } from '@/components/ui/EducationButton';
 import { EducationModal } from '@/components/ui/EducationModal';
@@ -29,7 +30,7 @@ export default function Portfolio() {
   const [isEducationModalOpen, setIsEducationModalOpen] = useState(false);
   const [selectedSkill, setSelectedSkill] = useState<EnhancedSkill | null>(null);
   const [isSkillModalOpen, setIsSkillModalOpen] = useState(false);
-  const { personal, about, skills, skillCategories, enhancedSkills, projects, experience, education, social } = usePortfolio();
+  const { personal, about, skills, skillCategories, enhancedSkills, projects, experience, education, contact, social } = usePortfolio();
 
   // Auto-detect active section on scroll
   React.useEffect(() => {
@@ -569,69 +570,7 @@ export default function Portfolio() {
       <TestimonialsSection />
 
       {/* Contact Section */}
-      <section id="contato" className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 bg-muted/50 relative overflow-hidden">
-        <div className="max-w-6xl mx-auto text-center relative z-10">
-          <AnimatedSection direction="up">
-            <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">
-              Vamos Otimizar Seus Processos?
-            </h2>
-            <div className="w-20 h-1 bg-primary mx-auto rounded-full mb-6 sm:mb-8" />
-            <p className="text-base sm:text-lg text-muted-foreground mb-8 sm:mb-12 max-w-2xl mx-auto px-2 leading-relaxed">
-              Interessado em implementar metodologias de qualidade e otimização de processos? Vamos conversar sobre como posso contribuir em seus projetos e melhorias.
-            </p>
-          </AnimatedSection>
-          
-          <AnimatedSection direction="up" delay={0.2}>
-            <div className="mb-8 sm:mb-12">
-              <SocialIcons 
-                email={personal.email}
-                linkedin={social.linkedin}
-                twitter={social.twitter}
-                iconSize="lg"
-              />
-            </div>
-          </AnimatedSection>
-          
-          {/* Contact info cards */}
-          <AnimatedSection direction="up" delay={0.4}>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-8 sm:mt-12">
-              {[
-                { label: 'Email', value: personal.email, Icon: Mail, color: 'text-[#EA4335]' },
-                { label: 'Telefone', value: personal.phone, Icon: Phone, color: 'text-[#0A66C2]' },
-                { label: 'Localização', value: personal.location, Icon: MapPin, color: 'text-[#1DA1F2]' }
-              ].map((item, index) => (
-                <motion.div
-                  key={item.label}
-                  className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-lg p-4 sm:p-6 text-center"
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
-                  whileHover={{ scale: 1.05, y: -5 }}
-                >
-                  <div className={`flex justify-center mb-2 sm:mb-3 ${item.color}`}>
-                    <item.Icon size={28} strokeWidth={2} className="sm:w-8 sm:h-8" />
-                  </div>
-                  <h3 className="font-semibold text-foreground mb-1 sm:mb-2 text-sm sm:text-base">{item.label}</h3>
-                  <p className="text-muted-foreground text-xs sm:text-sm break-words">{item.value}</p>
-                </motion.div>
-              ))}
-            </div>
-          </AnimatedSection>
-        </div>
-        
-        {/* Background decoration - Hidden on mobile for better performance */}
-        <motion.div
-          className="absolute top-10 left-4 sm:left-10 w-24 sm:w-32 h-24 sm:h-32 bg-primary/10 rounded-full blur-xl hidden sm:block"
-          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.1, 0.3] }}
-          transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-        />
-        <motion.div
-          className="absolute bottom-10 right-4 sm:right-10 w-20 sm:w-24 h-20 sm:h-24 bg-purple-500/10 rounded-full blur-xl hidden sm:block"
-          animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.05, 0.2] }}
-          transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-        />
-      </section>
+      <ContactSection contactData={contact} />
       
       <ScrollToTop />
 

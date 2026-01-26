@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
+import { CacheService } from '@/lib/cache/cache-service'
 import { z } from 'zod'
 
 // Schema for portfolio data validation
@@ -17,11 +18,21 @@ export async function GET() {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    // Get the latest published portfolio data
-    const portfolioData = await prisma.portfolioData.findFirst({
-      where: { isPublished: true },
-      orderBy: { version: 'desc' },
-    })
+    // Try to get from cache first
+    let portfolioData = await CacheService.getPortfolioData();
+
+    if (!portfolioData) {
+      // Get the latest published portfolio data from database
+      portfolioData = await prisma.portfolioData.findFirst({
+        where: { isPublished: true },
+        orderBy: { version: 'desc' },
+      })
+
+      if (portfolioData) {
+        // Cache the result
+        await CacheService.setPortfolioData(portfolioData);
+      }
+    }
 
     if (!portfolioData) {
       return NextResponse.json({ error: 'Portfolio data not found' }, { status: 404 })
@@ -69,6 +80,9 @@ export async function POST(request: NextRequest) {
         lastModified: new Date(),
       },
     })
+
+    // Invalidate cache
+    await CacheService.invalidatePortfolioData();
 
     // Create audit log
     await prisma.auditLog.create({
@@ -146,6 +160,9 @@ export async function PUT(request: NextRequest) {
         lastModified: new Date(),
       },
     })
+
+    // Invalidate cache
+    await CacheService.invalidatePortfolioData();
 
     // Create audit log
     await prisma.auditLog.create({

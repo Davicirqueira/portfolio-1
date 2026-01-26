@@ -1,5 +1,6 @@
 import { auth } from "@/lib/auth"
 import { redirect } from "next/navigation"
+import { DashboardAnalytics } from "@/components/admin/DashboardAnalytics"
 
 export default async function DashboardPage() {
   const session = await auth()
@@ -19,95 +20,9 @@ export default async function DashboardPage() {
         </p>
       </div>
 
-      {/* Dashboard overview cards */}
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
-        <div className="bg-card/50 backdrop-blur-sm border border-border overflow-hidden shadow-lg rounded-lg hover-lift">
-          <div className="p-5">
-            <div className="flex items-center">
-              <div className="flex-shrink-0">
-                <div className="w-8 h-8 bg-primary/10 rounded-md flex items-center justify-center ring-2 ring-primary/20">
-                  <span className="text-primary text-sm font-medium">H</span>
-                </div>
-              </div>
-              <div className="ml-5 w-0 flex-1">
-                <dl>
-                  <dt className="text-sm font-medium text-muted-foreground truncate">
-                    Seção Home
-                  </dt>
-                  <dd className="text-lg font-medium text-foreground">
-                    Configurado
-                  </dd>
-                </dl>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-card/50 backdrop-blur-sm border border-border overflow-hidden shadow-lg rounded-lg hover-lift">
-          <div className="p-5">
-            <div className="flex items-center">
-              <div className="flex-shrink-0">
-                <div className="w-8 h-8 bg-green-500/10 rounded-md flex items-center justify-center ring-2 ring-green-500/20">
-                  <span className="text-green-600 text-sm font-medium">P</span>
-                </div>
-              </div>
-              <div className="ml-5 w-0 flex-1">
-                <dl>
-                  <dt className="text-sm font-medium text-muted-foreground truncate">
-                    Projetos
-                  </dt>
-                  <dd className="text-lg font-medium text-foreground">
-                    3 Ativos
-                  </dd>
-                </dl>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-card/50 backdrop-blur-sm border border-border overflow-hidden shadow-lg rounded-lg hover-lift">
-          <div className="p-5">
-            <div className="flex items-center">
-              <div className="flex-shrink-0">
-                <div className="w-8 h-8 bg-yellow-500/10 rounded-md flex items-center justify-center ring-2 ring-yellow-500/20">
-                  <span className="text-yellow-600 text-sm font-medium">H</span>
-                </div>
-              </div>
-              <div className="ml-5 w-0 flex-1">
-                <dl>
-                  <dt className="text-sm font-medium text-muted-foreground truncate">
-                    Habilidades
-                  </dt>
-                  <dd className="text-lg font-medium text-foreground">
-                    14 Itens
-                  </dd>
-                </dl>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-card/50 backdrop-blur-sm border border-border overflow-hidden shadow-lg rounded-lg hover-lift">
-          <div className="p-5">
-            <div className="flex items-center">
-              <div className="flex-shrink-0">
-                <div className="w-8 h-8 bg-purple-500/10 rounded-md flex items-center justify-center ring-2 ring-purple-500/20">
-                  <span className="text-purple-600 text-sm font-medium">D</span>
-                </div>
-              </div>
-              <div className="ml-5 w-0 flex-1">
-                <dl>
-                  <dt className="text-sm font-medium text-muted-foreground truncate">
-                    Depoimentos
-                  </dt>
-                  <dd className="text-lg font-medium text-foreground">
-                    3 Ativos
-                  </dd>
-                </dl>
-              </div>
-            </div>
-          </div>
-        </div>
+      {/* Dashboard Analytics */}
+      <div className="animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+        <DashboardAnalytics />
       </div>
 
       {/* Quick actions */}
