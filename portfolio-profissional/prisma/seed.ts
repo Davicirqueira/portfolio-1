@@ -5,7 +5,7 @@ const prisma = new PrismaClient()
 
 async function main() {
   const adminEmail = process.env.ADMIN_EMAIL || 'admin@portfolio.com'
-  const adminPassword = process.env.ADMIN_PASSWORD || 'admin123'
+  const adminPassword = process.env.ADMIN_PASSWORD || 'admin@1212'
   const adminName = process.env.ADMIN_NAME || 'Administrator'
 
   // Check if admin user already exists
@@ -34,18 +34,23 @@ async function main() {
   console.log('Admin user created:', admin.email)
 
   // Create default admin settings
-  await prisma.adminSettings.create({
-    data: {
-      autoSave: true,
-      autoSaveInterval: 30,
-      requirePreview: false,
-      backupRetention: 30,
-      allowedImageFormats: ['jpg', 'jpeg', 'png', 'webp'],
-      maxImageSize: 5
-    }
-  })
-
-  console.log('Default admin settings created')
+  const existingSettings = await prisma.adminSettings.findFirst()
+  
+  if (!existingSettings) {
+    await prisma.adminSettings.create({
+      data: {
+        autoSave: true,
+        autoSaveInterval: 30,
+        requirePreview: false,
+        backupRetention: 30,
+        allowedImageFormats: "jpg,jpeg,png,webp" as any, // Comma-separated string for SQLite
+        maxImageSize: 5
+      }
+    })
+    console.log('Default admin settings created')
+  } else {
+    console.log('Admin settings already exist')
+  }
 }
 
 main()

@@ -4,8 +4,11 @@ import { useState, useEffect, Suspense } from "react"
 import { AdminSidebar } from "./AdminSidebar"
 import { AdminHeader } from "./AdminHeader"
 import { ThemeProvider } from "@/lib/context/ThemeContext"
+import { AccessibilityProvider } from "@/lib/context/AccessibilityContext"
+import { I18nProvider } from "@/lib/context/I18nContext"
 import { KeyboardShortcutsModal } from "../KeyboardShortcutsModal"
 import { LoadingSkeleton } from "@/components/ui/loading-skeleton"
+import { SkipLink } from "@/components/ui/skip-link"
 import { useKeyboardShortcuts, createDashboardShortcuts } from "@/lib/hooks/useKeyboardShortcuts"
 import { useDashboardAnalytics } from "@/lib/hooks/useDashboardAnalytics"
 import { usePerformance } from "@/hooks/use-performance"
@@ -92,55 +95,63 @@ export function AdminLayout({ children }: AdminLayoutProps) {
   }, [trackAction])
 
   return (
-    <ThemeProvider>
-      <div className="min-h-screen bg-background transition-colors duration-300">
-        {/* Sidebar for desktop */}
-        <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col">
-          <Suspense fallback={<LoadingSkeleton type="list" count={8} />}>
-            <AdminSidebar />
-          </Suspense>
-        </div>
+    <I18nProvider>
+      <AccessibilityProvider>
+        <ThemeProvider>
+          <div className="min-h-screen bg-background transition-colors duration-300">
+            {/* Skip Links */}
+            <SkipLink href="#main-content" />
+            <SkipLink href="#navigation">Skip to navigation</SkipLink>
 
-        {/* Mobile sidebar overlay */}
-        {sidebarOpen && (
-          <div className="fixed inset-0 z-40 lg:hidden">
-            <div 
-              className="fixed inset-0 bg-background/80 backdrop-blur-sm"
-              onClick={() => setSidebarOpen(false)}
-            />
-            <div className="fixed inset-y-0 left-0 flex w-64 flex-col">
+            {/* Sidebar for desktop */}
+            <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col">
               <Suspense fallback={<LoadingSkeleton type="list" count={8} />}>
-                <AdminSidebar onClose={() => setSidebarOpen(false)} />
+                <AdminSidebar />
               </Suspense>
             </div>
-          </div>
-        )}
 
-        {/* Main content */}
-        <div className="lg:pl-64">
-          <Suspense fallback={<LoadingSkeleton type="card" />}>
-            <AdminHeader 
-              onMenuClick={() => setSidebarOpen(true)}
-              onShowShortcuts={() => setShowShortcuts(true)}
+            {/* Mobile sidebar overlay */}
+            {sidebarOpen && (
+              <div className="fixed inset-0 z-40 lg:hidden">
+                <div 
+                  className="fixed inset-0 bg-background/80 backdrop-blur-sm"
+                  onClick={() => setSidebarOpen(false)}
+                />
+                <div className="fixed inset-y-0 left-0 flex w-64 flex-col">
+                  <Suspense fallback={<LoadingSkeleton type="list" count={8} />}>
+                    <AdminSidebar onClose={() => setSidebarOpen(false)} />
+                  </Suspense>
+                </div>
+              </div>
+            )}
+
+            {/* Main content */}
+            <div className="lg:pl-64">
+              <Suspense fallback={<LoadingSkeleton type="card" />}>
+                <AdminHeader 
+                  onMenuClick={() => setSidebarOpen(true)}
+                  onShowShortcuts={() => setShowShortcuts(true)}
+                />
+              </Suspense>
+              
+              <main id="main-content" className="py-6" tabIndex={-1}>
+                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                  <Suspense fallback={<LoadingSkeleton type="dashboard" />}>
+                    {children}
+                  </Suspense>
+                </div>
+              </main>
+            </div>
+
+            {/* Keyboard Shortcuts Modal */}
+            <KeyboardShortcutsModal
+              isOpen={showShortcuts}
+              onClose={() => setShowShortcuts(false)}
+              shortcuts={shortcuts}
             />
-          </Suspense>
-          
-          <main className="py-6">
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <Suspense fallback={<LoadingSkeleton type="dashboard" />}>
-                {children}
-              </Suspense>
-            </div>
-          </main>
-        </div>
-
-        {/* Keyboard Shortcuts Modal */}
-        <KeyboardShortcutsModal
-          isOpen={showShortcuts}
-          onClose={() => setShowShortcuts(false)}
-          shortcuts={shortcuts}
-        />
-      </div>
-    </ThemeProvider>
+          </div>
+        </ThemeProvider>
+      </AccessibilityProvider>
+    </I18nProvider>
   )
 }

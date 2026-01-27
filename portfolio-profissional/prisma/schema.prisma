@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
@@ -29,7 +29,7 @@ model User {
 model PortfolioData {
   id           String   @id @default(cuid())
   version      Int      @default(1)
-  data         Json
+  data         String   // JSON as string for SQLite
   isPublished  Boolean  @default(false)
   lastModified DateTime @default(now())
   modifiedBy   String
@@ -46,7 +46,7 @@ model DynamicModal {
   id        String   @id @default(cuid())
   type      String
   title     String
-  content   Json
+  content   String   // JSON as string for SQLite
   isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -66,8 +66,8 @@ model MediaFile {
   category    String
   size        Int
   mimeType    String
-  tags        String[] @default([])
-  usedIn      String[] @default([])
+  tags        String   @default("") // Comma-separated string for SQLite
+  usedIn      String   @default("") // Comma-separated string for SQLite
   isArchived  Boolean  @default(false)
   description String?
   createdAt   DateTime @default(now())
@@ -85,8 +85,8 @@ model AuditLog {
   userId    String
   action    String
   section   String
-  oldData   Json?
-  newData   Json?
+  oldData   String?  // JSON as string for SQLite
+  newData   String?  // JSON as string for SQLite
   timestamp DateTime @default(now())
   ipAddress String
   userAgent String
@@ -106,7 +106,7 @@ model AdminSettings {
   autoSaveInterval   Int      @default(30)
   requirePreview     Boolean  @default(false)
   backupRetention    Int      @default(30)
-  allowedImageFormats String[] @default(["jpg", "jpeg", "png", "webp"])
+  allowedImageFormats String   @default("jpg,jpeg,png,webp") // Comma-separated string for SQLite
   maxImageSize       Int      @default(5)
   createdAt          DateTime @default(now())
   updatedAt          DateTime @updatedAt

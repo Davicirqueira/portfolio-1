@@ -10,7 +10,7 @@ const nextConfig = {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
 
-  // Performance optimizations
+  // Performance optimizations - Turbopack compatible
   experimental: {
     optimizeCss: true,
     optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
@@ -51,41 +51,6 @@ const nextConfig = {
       },
     ];
   },
-
-  // Webpack optimizations
-  webpack: (config, { dev, isServer }) => {
-    // Production optimizations
-    if (!dev) {
-      config.optimization = {
-        ...config.optimization,
-        splitChunks: {
-          chunks: 'all',
-          cacheGroups: {
-            vendor: {
-              test: /[\\/]node_modules[\\/]/,
-              name: 'vendors',
-              chunks: 'all',
-            },
-            common: {
-              name: 'common',
-              minChunks: 2,
-              chunks: 'all',
-              enforce: true,
-            },
-          },
-        },
-      };
-    }
-
-    return config;
-  },
-
-  // Bundle analyzer (only in development)
-  ...(process.env.ANALYZE === 'true' && {
-    experimental: {
-      bundlePagesRouterDependencies: true,
-    },
-  }),
 };
 
 module.exports = nextConfig;
